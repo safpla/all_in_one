@@ -1,0 +1,497 @@
+2017-12-23 14:22:16.818040: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+2017-12-23 14:22:16.818092: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+2017-12-23 14:22:16.818102: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+2017-12-23 14:22:16.818108: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
+2017-12-23 14:22:16.818115: W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
+2017-12-23 14:22:20.474909: I tensorflow/core/common_runtime/gpu/gpu_device.cc:955] Found device 0 with properties: 
+name: GeForce GTX 1080 Ti
+major: 6 minor: 1 memoryClockRate (GHz) 1.582
+pciBusID 0000:05:00.0
+Total memory: 10.91GiB
+Free memory: 10.75GiB
+2017-12-23 14:22:20.645397: W tensorflow/stream_executor/cuda/cuda_driver.cc:523] A non-primary context 0x108b8de0 exists before initializing the StreamExecutor. We haven't verified StreamExecutor works with that.
+2017-12-23 14:22:20.646577: I tensorflow/core/common_runtime/gpu/gpu_device.cc:955] Found device 1 with properties: 
+name: GeForce GTX 1080 Ti
+major: 6 minor: 1 memoryClockRate (GHz) 1.582
+pciBusID 0000:06:00.0
+Total memory: 10.91GiB
+Free memory: 10.75GiB
+2017-12-23 14:22:20.811683: W tensorflow/stream_executor/cuda/cuda_driver.cc:523] A non-primary context 0x108b4f40 exists before initializing the StreamExecutor. We haven't verified StreamExecutor works with that.
+2017-12-23 14:22:20.812873: I tensorflow/core/common_runtime/gpu/gpu_device.cc:955] Found device 2 with properties: 
+name: GeForce GTX 1080 Ti
+major: 6 minor: 1 memoryClockRate (GHz) 1.582
+pciBusID 0000:09:00.0
+Total memory: 10.91GiB
+Free memory: 10.75GiB
+2017-12-23 14:22:20.978646: W tensorflow/stream_executor/cuda/cuda_driver.cc:523] A non-primary context 0x108b10a0 exists before initializing the StreamExecutor. We haven't verified StreamExecutor works with that.
+2017-12-23 14:22:20.979879: I tensorflow/core/common_runtime/gpu/gpu_device.cc:955] Found device 3 with properties: 
+name: GeForce GTX 1080 Ti
+major: 6 minor: 1 memoryClockRate (GHz) 1.582
+pciBusID 0000:0a:00.0
+Total memory: 10.91GiB
+Free memory: 10.75GiB
+2017-12-23 14:22:20.985699: I tensorflow/core/common_runtime/gpu/gpu_device.cc:976] DMA: 0 1 2 3 
+2017-12-23 14:22:20.985733: I tensorflow/core/common_runtime/gpu/gpu_device.cc:986] 0:   Y Y Y Y 
+2017-12-23 14:22:20.985741: I tensorflow/core/common_runtime/gpu/gpu_device.cc:986] 1:   Y Y Y Y 
+2017-12-23 14:22:20.985748: I tensorflow/core/common_runtime/gpu/gpu_device.cc:986] 2:   Y Y Y Y 
+2017-12-23 14:22:20.985755: I tensorflow/core/common_runtime/gpu/gpu_device.cc:986] 3:   Y Y Y Y 
+2017-12-23 14:22:20.985776: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1045] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 1080 Ti, pci bus id: 0000:05:00.0)
+2017-12-23 14:22:20.985786: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1045] Creating TensorFlow device (/gpu:1) -> (device: 1, name: GeForce GTX 1080 Ti, pci bus id: 0000:06:00.0)
+2017-12-23 14:22:20.985794: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1045] Creating TensorFlow device (/gpu:2) -> (device: 2, name: GeForce GTX 1080 Ti, pci bus id: 0000:09:00.0)
+2017-12-23 14:22:20.985801: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1045] Creating TensorFlow device (/gpu:3) -> (device: 3, name: GeForce GTX 1080 Ti, pci bus id: 0000:0a:00.0)
+Loading Data...
+W_train shape: (173118,)
+L_train shape: (173118,)
+Y_train shape: (173118, 16)
+W_dev shape: (19236,)
+L_dev shape: (19236,)
+Y_dev shape: (19236, 16)
+W_test shape: (21373,)
+L_test shape: (21373,)
+Y_test shape: (21373, 16)
+W_embedding shape: (44732, 100)
+maxlen: 422
+Label class: 16
+Y_distribution_r [6.1673258876284489, 4.7445163135334605, 2.3767703831206353, 10.675434360773409, 3.3186756716686237, 9.5768220721052995, 6.2902875987632836, 3.8053809489752832, 8.6944328919068248, 9.4967793644317631, 2.335634887914829, 2.2953217099055387, 6.7146211911758309, 5.4416555153629433, 7.1129688315151309, 6.9497409335367557]
+embedding Tensor("bi-lstm/word_embedding/embedding_lookup:0", shape=(?, ?, 100), dtype=float32, device=/device:CPU:0)
+
+Valid Label:[1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0]
+Valid Recall:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+Valid Precision:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]Batches: 5	Batch Time: 0.3385s
+Train Label: 0.956250	Train Loss: 10.630123	Train Recall: 0.000000	Train Precision: 0.000000
+Valid Label: 0.987500	Valid Loss: 0.005486	Valid Recall: 0.000000	Valid Precision: 0.000000
+Test Label: 0.981250	Test Loss: 0.004952	Test Recall: 0.000000	Test Precision: 0.000000
+Best Label: 0.987500	Best Loss: 0.005486	Best Recall: 0.000000	Best Precision: 0.000000
+
+
+Valid Label:[1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0]
+Valid Recall:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+Valid Precision:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]Batches: 10	Batch Time: 0.2499s
+Train Label: 0.981250	Train Loss: 6.258830	Train Recall: 0.000000	Train Precision: 0.000000
+Valid Label: 0.987500	Valid Loss: 0.003227	Valid Recall: 0.000000	Valid Precision: 0.000000
+Test Label: 0.981250	Test Loss: 0.002947	Test Recall: 0.000000	Test Precision: 0.000000
+Best Label: 0.987500	Best Loss: 0.003227	Best Recall: 0.000000	Best Precision: 0.000000
+
+
+Valid Label:[1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0]
+Valid Recall:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+Valid Precision:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]Batches: 15	Batch Time: 0.2236s
+Train Label: 0.968750	Train Loss: 2.872050	Train Recall: 0.000000	Train Precision: 0.000000
+Valid Label: 0.987500	Valid Loss: 0.001214	Valid Recall: 0.000000	Valid Precision: 0.000000
+Test Label: 0.981250	Test Loss: 0.001183	Test Recall: 0.000000	Test Precision: 0.000000
+Best Label: 0.987500	Best Loss: 0.001214	Best Recall: 0.000000	Best Precision: 0.000000
+
+
+Valid Label:[1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0]
+Valid Recall:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+Valid Precision:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]Batches: 20	Batch Time: 0.2856s
+Train Label: 0.975000	Train Loss: 1.819009	Train Recall: 0.000000	Train Precision: 0.000000
+Valid Label: 0.987500	Valid Loss: 0.000720	Valid Recall: 0.000000	Valid Precision: 0.000000
+Test Label: 0.981250	Test Loss: 0.000762	Test Recall: 0.000000	Test Precision: 0.000000
+Best Label: 0.987500	Best Loss: 0.000720	Best Recall: 0.000000	Best Precision: 0.000000
+
+
+Valid Label:[1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0]
+Valid Recall:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+Valid Precision:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]Batches: 25	Batch Time: 0.2831s
+Train Label: 0.993750	Train Loss: 0.920766	Train Recall: 0.000000	Train Precision: 0.000000
+Valid Label: 0.987500	Valid Loss: 0.000564	Valid Recall: 0.000000	Valid Precision: 0.000000
+Test Label: 0.981250	Test Loss: 0.000639	Test Recall: 0.000000	Test Precision: 0.000000
+Best Label: 0.987500	Best Loss: 0.000564	Best Recall: 0.000000	Best Precision: 0.000000
+
+
+Valid Label:[1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0]
+Valid Recall:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+Valid Precision:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]Batches: 30	Batch Time: 0.2621s
+Train Label: 0.987500	Train Loss: 0.921840	Train Recall: 0.000000	Train Precision: 0.000000
+Valid Label: 0.987500	Valid Loss: 0.000505	Valid Recall: 0.000000	Valid Precision: 0.000000
+Test Label: 0.981250	Test Loss: 0.000588	Test Recall: 0.000000	Test Precision: 0.000000
+Best Label: 0.987500	Best Loss: 0.000505	Best Recall: 0.000000	Best Precision: 0.000000
+
+
+Valid Label:[1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0]
+Valid Recall:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+Valid Precision:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]Batches: 35	Batch Time: 0.2492s
+Train Label: 0.950000	Train Loss: 2.857772	Train Recall: 0.000000	Train Precision: 0.000000
+Valid Label: 0.987500	Valid Loss: 0.000481	Valid Recall: 0.000000	Valid Precision: 0.000000
+Test Label: 0.981250	Test Loss: 0.000586	Test Recall: 0.000000	Test Precision: 0.000000
+Best Label: 0.987500	Best Loss: 0.000481	Best Recall: 0.000000	Best Precision: 0.000000
+
+
+Valid Label:[1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0]
+Valid Recall:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+Valid Precision:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]Batches: 40	Batch Time: 0.2611s
+Train Label: 0.981250	Train Loss: 1.363255	Train Recall: 0.000000	Train Precision: 0.000000
+Valid Label: 0.987500	Valid Loss: 0.000479	Valid Recall: 0.000000	Valid Precision: 0.000000
+Test Label: 0.981250	Test Loss: 0.000555	Test Recall: 0.000000	Test Precision: 0.000000
+Best Label: 0.987500	Best Loss: 0.000479	Best Recall: 0.000000	Best Precision: 0.000000
+
+
+Valid Label:[1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0]
+Valid Recall:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+Valid Precision:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]Batches: 45	Batch Time: 0.1831s
+Train Label: 0.975000	Train Loss: 1.470508	Train Recall: 0.000000	Train Precision: 0.000000
+Valid Label: 0.987500	Valid Loss: 0.000485	Valid Recall: 0.000000	Valid Precision: 0.000000
+Test Label: 0.981250	Test Loss: 0.000555	Test Recall: 0.000000	Test Precision: 0.000000
+Best Label: 0.987500	Best Loss: 0.000479	Best Recall: 0.000000	Best Precision: 0.000000
+
+
+Valid Label:[1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0]
+Valid Recall:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+Valid Precision:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]Batches: 50	Batch Time: 0.1758s
+Train Label: 0.993750	Train Loss: 0.644040	Train Recall: 0.000000	Train Precision: 0.000000
+Valid Label: 0.987500	Valid Loss: 0.000481	Valid Recall: 0.000000	Valid Precision: 0.000000
+Test Label: 0.981250	Test Loss: 0.000555	Test Recall: 0.000000	Test Precision: 0.000000
+Best Label: 0.987500	Best Loss: 0.000479	Best Recall: 0.000000	Best Precision: 0.000000
+
+
+Valid Label:[1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0]
+Valid Recall:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+Valid Precision:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]Batches: 55	Batch Time: 0.1913s
+Train Label: 0.975000	Train Loss: 1.407557	Train Recall: 0.000000	Train Precision: 0.000000
+Valid Label: 0.987500	Valid Loss: 0.000489	Valid Recall: 0.000000	Valid Precision: 0.000000
+Test Label: 0.981250	Test Loss: 0.000555	Test Recall: 0.000000	Test Precision: 0.000000
+Best Label: 0.987500	Best Loss: 0.000479	Best Recall: 0.000000	Best Precision: 0.000000
+
+
+Valid Label:[1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0]
+Valid Recall:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+Valid Precision:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]Batches: 60	Batch Time: 0.2040s
+Train Label: 0.975000	Train Loss: 1.307676	Train Recall: 0.000000	Train Precision: 0.000000
+Valid Label: 0.987500	Valid Loss: 0.000502	Valid Recall: 0.000000	Valid Precision: 0.000000
+Test Label: 0.981250	Test Loss: 0.000555	Test Recall: 0.000000	Test Precision: 0.000000
+Best Label: 0.987500	Best Loss: 0.000479	Best Recall: 0.000000	Best Precision: 0.000000
+
+
+Valid Label:[1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0]
+Valid Recall:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+Valid Precision:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]Batches: 65	Batch Time: 0.1721s
+Train Label: 0.981250	Train Loss: 1.114725	Train Recall: 0.000000	Train Precision: 0.000000
+Valid Label: 0.987500	Valid Loss: 0.000481	Valid Recall: 0.000000	Valid Precision: 0.000000
+Test Label: 0.981250	Test Loss: 0.000555	Test Recall: 0.000000	Test Precision: 0.000000
+Best Label: 0.987500	Best Loss: 0.000479	Best Recall: 0.000000	Best Precision: 0.000000
+
+
+Valid Label:[1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0]
+Valid Recall:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+Valid Precision:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]Batches: 70	Batch Time: 0.2754s
+Train Label: 0.968750	Train Loss: 1.773732	Train Recall: 0.000000	Train Precision: 0.000000
+Valid Label: 0.987500	Valid Loss: 0.000465	Valid Recall: 0.000000	Valid Precision: 0.000000
+Test Label: 0.981250	Test Loss: 0.000516	Test Recall: 0.000000	Test Precision: 0.000000
+Best Label: 0.987500	Best Loss: 0.000465	Best Recall: 0.000000	Best Precision: 0.000000
+
+
+Valid Label:[1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0]
+Valid Recall:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+Valid Precision:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]Batches: 75	Batch Time: 0.2584s
+Train Label: 0.987500	Train Loss: 1.132858	Train Recall: 0.000000	Train Precision: 0.000000
+Valid Label: 0.987500	Valid Loss: 0.000448	Valid Recall: 0.000000	Valid Precision: 0.000000
+Test Label: 0.981250	Test Loss: 0.000503	Test Recall: 0.000000	Test Precision: 0.000000
+Best Label: 0.987500	Best Loss: 0.000448	Best Recall: 0.000000	Best Precision: 0.000000
+
+
+Valid Label:[1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0]
+Valid Recall:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+Valid Precision:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]Batches: 80	Batch Time: 0.3359s
+Train Label: 0.981250	Train Loss: 1.036085	Train Recall: 0.000000	Train Precision: 0.000000
+Valid Label: 0.987500	Valid Loss: 0.000417	Valid Recall: 0.000000	Valid Precision: 0.000000
+Test Label: 0.981250	Test Loss: 0.000504	Test Recall: 0.000000	Test Precision: 0.000000
+Best Label: 0.987500	Best Loss: 0.000417	Best Recall: 0.000000	Best Precision: 0.000000
+
+
+Valid Label:[1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0]
+Valid Recall:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+Valid Precision:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]Batches: 85	Batch Time: 0.1957s
+Train Label: 0.981250	Train Loss: 1.162569	Train Recall: 0.000000	Train Precision: 0.000000
+Valid Label: 0.987500	Valid Loss: 0.000447	Valid Recall: 0.000000	Valid Precision: 0.000000
+Test Label: 0.981250	Test Loss: 0.000504	Test Recall: 0.000000	Test Precision: 0.000000
+Best Label: 0.987500	Best Loss: 0.000417	Best Recall: 0.000000	Best Precision: 0.000000
+
+
+Valid Label:[1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0]
+Valid Recall:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+Valid Precision:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]Batches: 90	Batch Time: 0.1653s
+Train Label: 0.975000	Train Loss: 1.540900	Train Recall: 0.000000	Train Precision: 0.000000
+Valid Label: 0.987500	Valid Loss: 0.000449	Valid Recall: 0.000000	Valid Precision: 0.000000
+Test Label: 0.981250	Test Loss: 0.000504	Test Recall: 0.000000	Test Precision: 0.000000
+Best Label: 0.987500	Best Loss: 0.000417	Best Recall: 0.000000	Best Precision: 0.000000
+
+
+Valid Label:[1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0]
+Valid Recall:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+Valid Precision:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]Batches: 95	Batch Time: 0.1664s
+Train Label: 0.993750	Train Loss: 0.524011	Train Recall: 0.000000	Train Precision: 0.000000
+Valid Label: 0.987500	Valid Loss: 0.000448	Valid Recall: 0.000000	Valid Precision: 0.000000
+Test Label: 0.981250	Test Loss: 0.000504	Test Recall: 0.000000	Test Precision: 0.000000
+Best Label: 0.987500	Best Loss: 0.000417	Best Recall: 0.000000	Best Precision: 0.000000
+
+
+Valid Label:[1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0]
+Valid Recall:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+Valid Precision:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]Batches: 100	Batch Time: 0.1772s
+Train Label: 0.968750	Train Loss: 1.451766	Train Recall: 0.000000	Train Precision: 0.000000
+Valid Label: 0.987500	Valid Loss: 0.000458	Valid Recall: 0.000000	Valid Precision: 0.000000
+Test Label: 0.981250	Test Loss: 0.000504	Test Recall: 0.000000	Test Precision: 0.000000
+Best Label: 0.987500	Best Loss: 0.000417	Best Recall: 0.000000	Best Precision: 0.000000
+
+
+Valid Label:[1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0]
+Valid Recall:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+Valid Precision:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]Batches: 105	Batch Time: 0.1567s
+Train Label: 0.987500	Train Loss: 0.790815	Train Recall: 0.000000	Train Precision: 0.000000
+Valid Label: 0.987500	Valid Loss: 0.000444	Valid Recall: 0.000000	Valid Precision: 0.000000
+Test Label: 0.981250	Test Loss: 0.000504	Test Recall: 0.000000	Test Precision: 0.000000
+Best Label: 0.987500	Best Loss: 0.000417	Best Recall: 0.000000	Best Precision: 0.000000
+
+
+Valid Label:[1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0]
+Valid Recall:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+Valid Precision:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]Batches: 110	Batch Time: 0.1672s
+Train Label: 0.981250	Train Loss: 1.015368	Train Recall: 0.000000	Train Precision: 0.000000
+Valid Label: 0.987500	Valid Loss: 0.000464	Valid Recall: 0.000000	Valid Precision: 0.000000
+Test Label: 0.981250	Test Loss: 0.000504	Test Recall: 0.000000	Test Precision: 0.000000
+Best Label: 0.987500	Best Loss: 0.000417	Best Recall: 0.000000	Best Precision: 0.000000
+
+
+Valid Label:[1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0]
+Valid Recall:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+Valid Precision:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]Batches: 115	Batch Time: 0.1594s
+Train Label: 0.968750	Train Loss: 1.697793	Train Recall: 0.000000	Train Precision: 0.000000
+Valid Label: 0.987500	Valid Loss: 0.000441	Valid Recall: 0.000000	Valid Precision: 0.000000
+Test Label: 0.981250	Test Loss: 0.000504	Test Recall: 0.000000	Test Precision: 0.000000
+Best Label: 0.987500	Best Loss: 0.000417	Best Recall: 0.000000	Best Precision: 0.000000
+
+
+Valid Label:[1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0]
+Valid Recall:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+Valid Precision:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]Batches: 120	Batch Time: 0.1748s
+Train Label: 0.981250	Train Loss: 1.098237	Train Recall: 0.000000	Train Precision: 0.000000
+Valid Label: 0.987500	Valid Loss: 0.000454	Valid Recall: 0.000000	Valid Precision: 0.000000
+Test Label: 0.981250	Test Loss: 0.000504	Test Recall: 0.000000	Test Precision: 0.000000
+Best Label: 0.987500	Best Loss: 0.000417	Best Recall: 0.000000	Best Precision: 0.000000
+
+
+Valid Label:[1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0]
+Valid Recall:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+Valid Precision:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]Batches: 125	Batch Time: 0.1734s
+Train Label: 0.987500	Train Loss: 0.845897	Train Recall: 0.000000	Train Precision: 0.000000
+Valid Label: 0.987500	Valid Loss: 0.000429	Valid Recall: 0.000000	Valid Precision: 0.000000
+Test Label: 0.981250	Test Loss: 0.000504	Test Recall: 0.000000	Test Precision: 0.000000
+Best Label: 0.987500	Best Loss: 0.000417	Best Recall: 0.000000	Best Precision: 0.000000
+
+
+Valid Label:[1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0]
+Valid Recall:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+Valid Precision:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]Batches: 130	Batch Time: 0.2270s
+Train Label: 0.975000	Train Loss: 1.244530	Train Recall: 0.000000	Train Precision: 0.000000
+Valid Label: 0.987500	Valid Loss: 0.000446	Valid Recall: 0.000000	Valid Precision: 0.000000
+Test Label: 0.981250	Test Loss: 0.000504	Test Recall: 0.000000	Test Precision: 0.000000
+Best Label: 0.987500	Best Loss: 0.000417	Best Recall: 0.000000	Best Precision: 0.000000
+
+
+Valid Label:[1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0]
+Valid Recall:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+Valid Precision:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]Batches: 135	Batch Time: 0.1876s
+Train Label: 0.937500	Train Loss: 3.388179	Train Recall: 0.000000	Train Precision: 0.000000
+Valid Label: 0.987500	Valid Loss: 0.000430	Valid Recall: 0.000000	Valid Precision: 0.000000
+Test Label: 0.981250	Test Loss: 0.000504	Test Recall: 0.000000	Test Precision: 0.000000
+Best Label: 0.987500	Best Loss: 0.000417	Best Recall: 0.000000	Best Precision: 0.000000
+
+
+Valid Label:[1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0]
+Valid Recall:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+Valid Precision:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]Batches: 140	Batch Time: 0.3189s
+Train Label: 1.000000	Train Loss: 0.322604	Train Recall: 0.000000	Train Precision: 0.000000
+Valid Label: 0.987500	Valid Loss: 0.000405	Valid Recall: 0.000000	Valid Precision: 0.000000
+Test Label: 0.981250	Test Loss: 0.000495	Test Recall: 0.000000	Test Precision: 0.000000
+Best Label: 0.987500	Best Loss: 0.000405	Best Recall: 0.000000	Best Precision: 0.000000
+
+
+Valid Label:[1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0]
+Valid Recall:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+Valid Precision:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]Batches: 145	Batch Time: 0.1728s
+Train Label: 0.968750	Train Loss: 1.869117	Train Recall: 0.000000	Train Precision: 0.000000
+Valid Label: 0.987500	Valid Loss: 0.000429	Valid Recall: 0.000000	Valid Precision: 0.000000
+Test Label: 0.981250	Test Loss: 0.000495	Test Recall: 0.000000	Test Precision: 0.000000
+Best Label: 0.987500	Best Loss: 0.000405	Best Recall: 0.000000	Best Precision: 0.000000
+
+
+Valid Label:[1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0]
+Valid Recall:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+Valid Precision:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]Batches: 150	Batch Time: 0.1825s
+Train Label: 1.000000	Train Loss: 0.324761	Train Recall: 0.000000	Train Precision: 0.000000
+Valid Label: 0.987500	Valid Loss: 0.000420	Valid Recall: 0.000000	Valid Precision: 0.000000
+Test Label: 0.981250	Test Loss: 0.000495	Test Recall: 0.000000	Test Precision: 0.000000
+Best Label: 0.987500	Best Loss: 0.000405	Best Recall: 0.000000	Best Precision: 0.000000
+
+
+Valid Label:[1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0]
+Valid Recall:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+Valid Precision:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]Batches: 155	Batch Time: 0.1611s
+Train Label: 0.981250	Train Loss: 1.160401	Train Recall: 0.000000	Train Precision: 0.000000
+Valid Label: 0.987500	Valid Loss: 0.000434	Valid Recall: 0.000000	Valid Precision: 0.000000
+Test Label: 0.981250	Test Loss: 0.000495	Test Recall: 0.000000	Test Precision: 0.000000
+Best Label: 0.987500	Best Loss: 0.000405	Best Recall: 0.000000	Best Precision: 0.000000
+
+
+Valid Label:[1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0]
+Valid Recall:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+Valid Precision:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]Batches: 160	Batch Time: 0.1588s
+Train Label: 0.962500	Train Loss: 1.625213	Train Recall: 0.000000	Train Precision: 0.000000
+Valid Label: 0.987500	Valid Loss: 0.000474	Valid Recall: 0.000000	Valid Precision: 0.000000
+Test Label: 0.981250	Test Loss: 0.000495	Test Recall: 0.000000	Test Precision: 0.000000
+Best Label: 0.987500	Best Loss: 0.000405	Best Recall: 0.000000	Best Precision: 0.000000
+
+
+Valid Label:[1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0]
+Valid Recall:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+Valid Precision:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]Batches: 165	Batch Time: 0.1804s
+Train Label: 1.000000	Train Loss: 0.308100	Train Recall: 0.000000	Train Precision: 0.000000
+Valid Label: 0.987500	Valid Loss: 0.000429	Valid Recall: 0.000000	Valid Precision: 0.000000
+Test Label: 0.981250	Test Loss: 0.000495	Test Recall: 0.000000	Test Precision: 0.000000
+Best Label: 0.987500	Best Loss: 0.000405	Best Recall: 0.000000	Best Precision: 0.000000
+
+
+Valid Label:[1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0]
+Valid Recall:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+Valid Precision:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]Batches: 170	Batch Time: 0.1799s
+Train Label: 0.968750	Train Loss: 1.554212	Train Recall: 0.000000	Train Precision: 0.000000
+Valid Label: 0.987500	Valid Loss: 0.000450	Valid Recall: 0.000000	Valid Precision: 0.000000
+Test Label: 0.981250	Test Loss: 0.000495	Test Recall: 0.000000	Test Precision: 0.000000
+Best Label: 0.987500	Best Loss: 0.000405	Best Recall: 0.000000	Best Precision: 0.000000
+
+
+Valid Label:[1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0]
+Valid Recall:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+Valid Precision:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]Batches: 175	Batch Time: 0.1692s
+Train Label: 0.968750	Train Loss: 1.552780	Train Recall: 0.000000	Train Precision: 0.000000
+Valid Label: 0.987500	Valid Loss: 0.000426	Valid Recall: 0.000000	Valid Precision: 0.000000
+Test Label: 0.981250	Test Loss: 0.000495	Test Recall: 0.000000	Test Precision: 0.000000
+Best Label: 0.987500	Best Loss: 0.000405	Best Recall: 0.000000	Best Precision: 0.000000
+
+
+Valid Label:[1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0]
+Valid Recall:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+Valid Precision:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]Batches: 180	Batch Time: 0.2122s
+Train Label: 0.968750	Train Loss: 1.638567	Train Recall: 0.000000	Train Precision: 0.000000
+Valid Label: 0.987500	Valid Loss: 0.000418	Valid Recall: 0.000000	Valid Precision: 0.000000
+Test Label: 0.981250	Test Loss: 0.000495	Test Recall: 0.000000	Test Precision: 0.000000
+Best Label: 0.987500	Best Loss: 0.000405	Best Recall: 0.000000	Best Precision: 0.000000
+
+
+Valid Label:[1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0]
+Valid Recall:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+Valid Precision:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]Batches: 185	Batch Time: 0.1656s
+Train Label: 0.993750	Train Loss: 0.632819	Train Recall: 0.000000	Train Precision: 0.000000
+Valid Label: 0.987500	Valid Loss: 0.000424	Valid Recall: 0.000000	Valid Precision: 0.000000
+Test Label: 0.981250	Test Loss: 0.000495	Test Recall: 0.000000	Test Precision: 0.000000
+Best Label: 0.987500	Best Loss: 0.000405	Best Recall: 0.000000	Best Precision: 0.000000
+
+
+Valid Label:[1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0]
+Valid Recall:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+Valid Precision:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]Batches: 190	Batch Time: 0.2160s
+Train Label: 0.937500	Train Loss: 3.243860	Train Recall: 0.000000	Train Precision: 0.000000
+Valid Label: 0.987500	Valid Loss: 0.000458	Valid Recall: 0.000000	Valid Precision: 0.000000
+Test Label: 0.981250	Test Loss: 0.000495	Test Recall: 0.000000	Test Precision: 0.000000
+Best Label: 0.987500	Best Loss: 0.000405	Best Recall: 0.000000	Best Precision: 0.000000
+
+
+Valid Label:[1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0]
+Valid Recall:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+Valid Precision:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]Batches: 195	Batch Time: 0.1939s
+Train Label: 0.968750	Train Loss: 1.589015	Train Recall: 0.000000	Train Precision: 0.000000
+Valid Label: 0.987500	Valid Loss: 0.000444	Valid Recall: 0.000000	Valid Precision: 0.000000
+Test Label: 0.981250	Test Loss: 0.000495	Test Recall: 0.000000	Test Precision: 0.000000
+Best Label: 0.987500	Best Loss: 0.000405	Best Recall: 0.000000	Best Precision: 0.000000
+
+
+Valid Label:[1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0]
+Valid Recall:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+Valid Precision:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]Batches: 200	Batch Time: 0.1743s
+Train Label: 0.962500	Train Loss: 2.433189	Train Recall: 0.000000	Train Precision: 0.000000
+Valid Label: 0.987500	Valid Loss: 0.000459	Valid Recall: 0.000000	Valid Precision: 0.000000
+Test Label: 0.981250	Test Loss: 0.000495	Test Recall: 0.000000	Test Precision: 0.000000
+Best Label: 0.987500	Best Loss: 0.000405	Best Recall: 0.000000	Best Precision: 0.000000
+
+
+Valid Label:[1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0]
+Valid Recall:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+Valid Precision:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]Batches: 205	Batch Time: 0.1572s
+Train Label: 0.975000	Train Loss: 1.411723	Train Recall: 0.000000	Train Precision: 0.000000
+Valid Label: 0.987500	Valid Loss: 0.000442	Valid Recall: 0.000000	Valid Precision: 0.000000
+Test Label: 0.981250	Test Loss: 0.000495	Test Recall: 0.000000	Test Precision: 0.000000
+Best Label: 0.987500	Best Loss: 0.000405	Best Recall: 0.000000	Best Precision: 0.000000
+
+
+Valid Label:[1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0]
+Valid Recall:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+Valid Precision:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]Batches: 210	Batch Time: 0.1963s
+Train Label: 0.975000	Train Loss: 1.228079	Train Recall: 0.000000	Train Precision: 0.000000
+Valid Label: 0.987500	Valid Loss: 0.000439	Valid Recall: 0.000000	Valid Precision: 0.000000
+Test Label: 0.981250	Test Loss: 0.000495	Test Recall: 0.000000	Test Precision: 0.000000
+Best Label: 0.987500	Best Loss: 0.000405	Best Recall: 0.000000	Best Precision: 0.000000
+
+
+Valid Label:[1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0]
+Valid Recall:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+Valid Precision:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]Batches: 215	Batch Time: 0.1822s
+Train Label: 0.987500	Train Loss: 0.911240	Train Recall: 0.000000	Train Precision: 0.000000
+Valid Label: 0.987500	Valid Loss: 0.000427	Valid Recall: 0.000000	Valid Precision: 0.000000
+Test Label: 0.981250	Test Loss: 0.000495	Test Recall: 0.000000	Test Precision: 0.000000
+Best Label: 0.987500	Best Loss: 0.000405	Best Recall: 0.000000	Best Precision: 0.000000
+
+
+Valid Label:[1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0]
+Valid Recall:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+Valid Precision:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]Batches: 220	Batch Time: 0.2430s
+Train Label: 0.962500	Train Loss: 1.925093	Train Recall: 0.000000	Train Precision: 0.000000
+Valid Label: 0.987500	Valid Loss: 0.000484	Valid Recall: 0.000000	Valid Precision: 0.000000
+Test Label: 0.981250	Test Loss: 0.000495	Test Recall: 0.000000	Test Precision: 0.000000
+Best Label: 0.987500	Best Loss: 0.000405	Best Recall: 0.000000	Best Precision: 0.000000
+
+
+Valid Label:[1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0]
+Valid Recall:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+Valid Precision:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]Batches: 225	Batch Time: 0.1601s
+Train Label: 0.975000	Train Loss: 1.316296	Train Recall: 0.000000	Train Precision: 0.000000
+Valid Label: 0.987500	Valid Loss: 0.000463	Valid Recall: 0.000000	Valid Precision: 0.000000
+Test Label: 0.981250	Test Loss: 0.000495	Test Recall: 0.000000	Test Precision: 0.000000
+Best Label: 0.987500	Best Loss: 0.000405	Best Recall: 0.000000	Best Precision: 0.000000
+
+
+Valid Label:[1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0]
+Valid Recall:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+Valid Precision:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]Batches: 230	Batch Time: 0.2232s
+Train Label: 0.968750	Train Loss: 1.674996	Train Recall: 0.000000	Train Precision: 0.000000
+Valid Label: 0.987500	Valid Loss: 0.000469	Valid Recall: 0.000000	Valid Precision: 0.000000
+Test Label: 0.981250	Test Loss: 0.000495	Test Recall: 0.000000	Test Precision: 0.000000
+Best Label: 0.987500	Best Loss: 0.000405	Best Recall: 0.000000	Best Precision: 0.000000
+
+
+Valid Label:[1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0]
+Valid Recall:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+Valid Precision:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]Batches: 235	Batch Time: 0.1913s
+Train Label: 0.981250	Train Loss: 1.055541	Train Recall: 0.000000	Train Precision: 0.000000
+Valid Label: 0.987500	Valid Loss: 0.000448	Valid Recall: 0.000000	Valid Precision: 0.000000
+Test Label: 0.981250	Test Loss: 0.000495	Test Recall: 0.000000	Test Precision: 0.000000
+Best Label: 0.987500	Best Loss: 0.000405	Best Recall: 0.000000	Best Precision: 0.000000
+
+
+Valid Label:[1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.9, 1.0, 1.0, 1.0, 1.0, 1.0]
+Valid Recall:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+Valid Precision:[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]Batches: 240	Batch Time: 0.2190s
+Train Label: 0.981250	Train Loss: 1.117928	Train Recall: 0.000000	Train Precision: 0.000000
+Valid Label: 0.987500	Valid Loss: 0.000460	Valid Recall: 0.000000	Valid Precision: 0.000000
+Test Label: 0.981250	Test Loss: 0.000495	Test Recall: 0.000000	Test Precision: 0.000000
+Best Label: 0.987500	Best Loss: 0.000405	Best Recall: 0.000000	Best Precision: 0.000000
+
+Accuracy:
+0.98125
+[0.98124999999999996]
+Recall:
+0.0
+[0.0]
+Precision:
+0.0
+[0.0]

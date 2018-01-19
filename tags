@@ -1,0 +1,209 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+BaseTokenizer	data/data_utils/tokenizer.py	/^class BaseTokenizer(object):$/;"	c
+CNN_Text	run/zzxs_tag_pytorch/model.py	/^class  CNN_Text(nn.Module):$/;"	c
+CharacterTokenizer	data/data_utils/tokenizer.py	/^class CharacterTokenizer(BaseTokenizer):$/;"	c
+Config	config/config_utils.py	/^class Config(ConfigParser):$/;"	c
+DataProcessor	data/data_utils/data_processor.py	/^class DataProcessor:$/;"	c
+FOL	run/zzxs_tag_pytorch/fol.py	/^class FOL(object):$/;"	c
+FOL_But	run/zzxs_tag_pytorch/fol.py	/^class FOL_But(FOL):$/;"	c
+HanlpTokenizer	data/data_utils/tokenizer.py	/^class HanlpTokenizer(BaseTokenizer):$/;"	c
+JiebaTokenizer	data/data_utils/tokenizer.py	/^class JiebaTokenizer(BaseTokenizer):$/;"	c
+Model	models/cnn_model_one_layer/model_cnn.py	/^class Model:$/;"	c
+Model	models/cnn_model_one_layer_tag/model_cnn.py	/^class Model:$/;"	c
+ThulacTokenizer	data/data_utils/tokenizer.py	/^class ThulacTokenizer(BaseTokenizer):$/;"	c
+YouGenerator	data/data_utils/data_generator.py	/^class YouGenerator(DataProcessor):$/;"	c
+YouGenerator	data/data_utils/data_generator_zzxs.py	/^class YouGenerator(DataProcessor):$/;"	c
+__call__	config/config_utils.py	/^    def __call__(self, filenames, encoding=None):$/;"	m	class:Config	file:
+__init__	config/config_utils.py	/^    def __init__(self, *args, **kwargs):$/;"	m	class:Config
+__init__	data/data_utils/data_generator.py	/^    def __init__(self, file_path, sheet_num=0, tokenizer_tool='thulac', model_path='thulac_models', seg_only=False, **kwargs):$/;"	m	class:YouGenerator
+__init__	data/data_utils/data_generator_zzxs.py	/^    def __init__(self, file_path, sheet_num=0, tokenizer_tool='thulac', model_path='thulac_models', seg_only=False, **kwargs):$/;"	m	class:YouGenerator
+__init__	data/data_utils/data_processor.py	/^    def __init__(self, file_path, model_name, sheet_num=0, tokenizer_tool='thulac', seg_only=False, max_pro=5, **kwargs):$/;"	m	class:DataProcessor
+__init__	data/data_utils/tokenizer.py	/^    def __init__(self):  # FIXME$/;"	m	class:BaseTokenizer
+__init__	data/data_utils/tokenizer.py	/^    def __init__(self):  # FIXME$/;"	m	class:JiebaTokenizer
+__init__	data/data_utils/tokenizer.py	/^    def __init__(self, keep_space=False):  # FIXME$/;"	m	class:CharacterTokenizer
+__init__	data/data_utils/tokenizer.py	/^    def __init__(self, seg_only=False, segment_model_path='thulac_models'):  # FIXME$/;"	m	class:ThulacTokenizer
+__init__	data/data_utils/tokenizer.py	/^    def __init__(self, whichtools):  # FIXME$/;"	m	class:HanlpTokenizer
+__init__	models/cnn_model_one_layer/model_cnn.py	/^    def __init__(self, label_class, maxlen, W_embedding, label_dict, y_distribution, config, multilabel=False):$/;"	m	class:Model
+__init__	models/cnn_model_one_layer_tag/model_cnn.py	/^    def __init__(self, label_class, maxlen, W_embedding, label_dict, y_distribution, tag_class, config, multilabel=False):$/;"	m	class:Model
+__init__	run/zzxs_tag_pytorch/fol.py	/^    def __init__(self, K, input, fea):$/;"	m	class:FOL
+__init__	run/zzxs_tag_pytorch/fol.py	/^    def __init__(self, K, input, fea):$/;"	m	class:FOL_But
+__init__	run/zzxs_tag_pytorch/model.py	/^    def __init__(self, args):$/;"	m	class:CNN_Text
+__repr__	data/data_utils/data_processor.py	/^    def __repr__(self):$/;"	m	class:DataProcessor	file:
+__str__	data/data_utils/data_processor.py	/^    __str__ = __repr__$/;"	v	class:DataProcessor
+add_babei	data/data_utils/utils.py	/^    def add_babei(sent):$/;"	f	function:add_tag_padding
+add_func	data/data_utils/utils.py	/^    def add_func(sent):$/;"	f	function:add_tag_padding
+add_func	data/data_utils/utils.py	/^    def add_func(sents):$/;"	f	function:add_padding
+add_padding	data/data_utils/utils.py	/^def add_padding(lines):$/;"	f
+add_tag_padding	data/data_utils/utils.py	/^def add_tag_padding(lines):$/;"	f
+args	run/zzxs_tag_pytorch/main.py	/^args = parser.parse_args()$/;"	v
+bar_func	data/data_utils/data_processor.py	/^        def bar_func():$/;"	f	function:DataProcessor.get_cuted_data
+batch_size	run/zzxs_tag_pytorch/config.py	/^batch_size = 100$/;"	v
+build_cross_validation	data/data_utils/data_processor.py	/^    def build_cross_validation(self, file_num=10, modify_vocab=None, call_back=None, reflush=False):$/;"	m	class:DataProcessor
+build_label_class_mapping	data/data_utils/data_processor.py	/^    def build_label_class_mapping(self, write=True, call_back=None):$/;"	m	class:DataProcessor
+build_vocab_inword	data/data_utils/data_processor.py	/^    def build_vocab_inword(self, modify_vocab=None,  write=True, call_back=None, reflush=False):$/;"	m	class:DataProcessor
+build_word_embedding	data/data_utils/data_processor.py	/^    def build_word_embedding(self, word_embedding_name='thulac', word_embedding_dims=100, modify_vocab=None, write=True, call_back=None, reflush=False):$/;"	m	class:DataProcessor
+calc_rule_constraints	run/zzxs_tag_pytorch/fol.py	/^    def calc_rule_constraints(logit_rule, rule_ind):$/;"	f	function:rule_but_bei
+checkpoint_num	run/zzxs_tag_pytorch/config.py	/^checkpoint_num = 20$/;"	v
+condition_single	run/zzxs_tag_pytorch/fol.py	/^    def condition_single(self, x, f):$/;"	m	class:FOL
+condition_single	run/zzxs_tag_pytorch/fol.py	/^    def condition_single(self, x, f):$/;"	m	class:FOL_But
+conditions	run/zzxs_tag_pytorch/fol.py	/^    def conditions(self, X, F):$/;"	m	class:FOL
+config	run/cqcx/run.py	/^config = config_utils.Config()(root_path + '\/all_in_one\/config\/' + mission + '\/config.ini')['model_parameter']$/;"	v
+config	run/dkqr/run.py	/^config = config_utils.Config()(root_path + '\/all_in_one\/config\/' + mission + '\/config.ini')['model_parameter']$/;"	v
+config	run/jg/run.py	/^config = config_utils.Config()(root_path + '\/all_in_one\/config\/' + mission + '\/config.ini')['model_parameter']$/;"	v
+config	run/pp/run.py	/^config = config_utils.Config()(root_path + '\/all_in_one\/config\/' + mission + '\/config.ini')['model_parameter']$/;"	v
+config	run/xp/run.py	/^config = config_utils.Config()(root_path + '\/all_in_one\/config\/' + mission + '\/config.ini')['model_parameter']$/;"	v
+config	run/xwtd/run.py	/^config = config_utils.Config()(root_path + '\/all_in_one\/config\/' + mission + '\/config.ini')['model_parameter']$/;"	v
+config	run/zzxs/run.py	/^config = config_utils.Config()(root_path + '\/all_in_one\/config\/' + mission + '\/config.ini')['model_parameter']$/;"	v
+config	run/zzxs_tag/run.py	/^config = config_utils.Config()(root_path + '\/all_in_one\/config\/' + mission + '\/config.ini')['model_parameter']$/;"	v
+config_path	data/data_utils/data_processor.py	/^config_path = root_path + '\/all_in_one\/config\/base_config.ini'$/;"	v
+conv1d	models/cnn_model_one_layer/model_cnn.py	/^        def conv1d(x, conv_W, conv_b):$/;"	f	function:Model.__init__
+conv1d	models/cnn_model_one_layer_tag/model_cnn.py	/^        def conv1d(x, conv_W, conv_b):$/;"	f	function:Model.__init__
+conv_and_pool	run/zzxs_tag_pytorch/model.py	/^    def conv_and_pool(self, x, conv):$/;"	m	class:CNN_Text
+conv_bias_variable	models/cnn_model_one_layer/model_cnn.py	/^        def conv_bias_variable(shape):$/;"	f	function:Model.__init__
+conv_bias_variable	models/cnn_model_one_layer_tag/model_cnn.py	/^        def conv_bias_variable(shape):$/;"	f	function:Model.__init__
+conv_init_weights	run/zzxs_tag_pytorch/model.py	/^    def conv_init_weights(self, conv):$/;"	m	class:CNN_Text
+conv_weight_variable	models/cnn_model_one_layer/model_cnn.py	/^        def conv_weight_variable(shape):$/;"	f	function:Model.__init__
+conv_weight_variable	models/cnn_model_one_layer_tag/model_cnn.py	/^        def conv_weight_variable(shape):$/;"	f	function:Model.__init__
+cut	data/data_utils/tokenizer.py	/^    def cut(self):  # FIXME$/;"	m	class:HanlpTokenizer
+cut	data/data_utils/tokenizer.py	/^    def cut(self, sents):  # FIXME$/;"	m	class:BaseTokenizer
+cut	data/data_utils/tokenizer.py	/^    def cut(self, sents):  # FIXME$/;"	m	class:JiebaTokenizer
+cut	data/data_utils/tokenizer.py	/^    def cut(self, sents):$/;"	m	class:CharacterTokenizer
+cut	data/data_utils/tokenizer.py	/^    def cut(self, sents):$/;"	m	class:ThulacTokenizer
+cut_f	data/data_utils/tokenizer.py	/^    def cut_f(self, input_file, output_file):$/;"	m	class:CharacterTokenizer
+cut_f	data/data_utils/tokenizer.py	/^    def cut_f(self, input_file, output_file):$/;"	m	class:ThulacTokenizer
+cut_func	data/data_utils/data_processor.py	/^        def cut_func(*lines):$/;"	f	function:DataProcessor.get_cuted_data
+cv	data/data_utils/utils.py	/^def cv(model_name, lines, write=True, save_path='', segment_num=10):$/;"	f
+data_generator	data/data_utils/data_generator.py	/^def data_generator():$/;"	f
+data_generator	run/cqcx/data_generator.py	/^def data_generator(excel_name, data_name):$/;"	f
+data_generator	run/dkqr/data_generator.py	/^def data_generator(excel_name, data_name):$/;"	f
+data_generator	run/jg/data_generator.py	/^def data_generator(excel_name, data_name):$/;"	f
+data_generator	run/pp/data_generator.py	/^def data_generator(excel_name, data_name):$/;"	f
+data_generator	run/xp/data_generator.py	/^def data_generator(excel_name, data_name):$/;"	f
+data_generator	run/xwtd/data_generator.py	/^def data_generator(excel_name, data_name):$/;"	f
+data_generator	run/zzxs/data_generator.py	/^def data_generator(excel_name, data_name):$/;"	f
+data_generator	run/zzxs_tag/data_generator.py	/^def data_generator(excel_name, data_name):$/;"	f
+data_generator_zzxs	data/data_utils/data_generator_zzxs.py	/^def data_generator_zzxs(excel_name, data_name):$/;"	f
+data_generator_zzxs_babei	run/zzxs_tag_pytorch/data_generator_zzxs_tag.py	/^def data_generator_zzxs_babei(excel_name, data_name):$/;"	f
+default4vocab	data/data_utils/utils.py	/^def default4vocab():$/;"	f
+distribution_helper	run/zzxs_tag_pytorch/fol.py	/^    def distribution_helper(self, w, X, F, conds):$/;"	m	class:FOL
+distribution_helper_helper	run/zzxs_tag_pytorch/fol.py	/^    def distribution_helper_helper(self, x, f):$/;"	m	class:FOL
+dropout_mlp	run/zzxs_tag_pytorch/config.py	/^dropout_mlp = 0.5$/;"	v
+eval	run/zzxs_tag_pytorch/train.py	/^def eval(train_iter, model, args):$/;"	f
+evaluate_func	utils/evaluate_func.py	/^def evaluate_func(results, multilabel=False, print_results=False):$/;"	f
+excel2id	data/data_utils/data_processor.py	/^    def excel2id(self, modify_vocab=utils.default4vocab, write=True, call_back=None, reflush=False):$/;"	m	class:DataProcessor
+excel2raw	data/data_utils/data_processor.py	/^    def excel2raw(self, write=True, call_back=None):$/;"	m	class:DataProcessor
+export	utils/export_func.py	/^def export(model, sess, signature_name, export_path=root_path + '\/all_in_one\/demo\/exported_models\/', version=1):$/;"	f
+filter_lengths	run/zzxs_tag_pytorch/config.py	/^filter_lengths = [1, 2, 3, 4, 5]$/;"	v
+filter_num	run/zzxs_tag_pytorch/config.py	/^filter_num = 300$/;"	v
+forward	run/zzxs_tag_pytorch/model.py	/^    def forward(self, x, tag_label_sen_index, is_training):$/;"	m	class:CNN_Text
+gen_data_iter	run/zzxs_tag_pytorch/main.py	/^def gen_data_iter(train_data_path, test_data_path, path_prefix):$/;"	f
+get_cuted_data	data/data_utils/data_processor.py	/^    def get_cuted_data(self, write=True, call_back=None):$/;"	m	class:DataProcessor
+get_formed_data	data/data_utils/data_processor.py	/^    def get_formed_data(self, call_back=None):$/;"	m	class:DataProcessor
+get_train_data	models/cnn_model_one_layer/utilizer.py	/^def get_train_data(data, maxlen=0):$/;"	f
+get_train_data	models/cnn_model_one_layer_tag/utilizer.py	/^def get_train_data(data, dictionary, maxlen=0):$/;"	f
+get_train_data	run/zzxs_tag_pytorch/utilizer.py	/^def get_train_data(data, maxlen):$/;"	f
+grad_lim	run/zzxs_tag_pytorch/config.py	/^grad_lim = 5.0$/;"	v
+init_weights	run/zzxs_tag_pytorch/model.py	/^    def init_weights(self):$/;"	m	class:CNN_Text
+log_distribution	run/zzxs_tag_pytorch/fol.py	/^    def log_distribution(self, w, X=None, F=None):$/;"	m	class:FOL_But
+log_distribution	run/zzxs_tag_pytorch/fol.py	/^    def log_distribution(self, w, X=None, F=None, config={}):$/;"	m	class:FOL
+main	run/cqcx/run.py	/^def main(_):$/;"	f
+main	run/dkqr/run.py	/^def main(_):$/;"	f
+main	run/jg/run.py	/^def main(_):$/;"	f
+main	run/pp/run.py	/^def main(_):$/;"	f
+main	run/xp/run.py	/^def main(_):$/;"	f
+main	run/xwtd/run.py	/^def main(_):$/;"	f
+main	run/zzxs/run.py	/^def main(_):$/;"	f
+main	run/zzxs_tag/run.py	/^def main(_):$/;"	f
+mapping_label	data/data_utils/data_processor.py	/^        def mapping_label(labels_list):$/;"	f	function:DataProcessor.excel2id
+mission	run/cqcx/run.py	/^mission = 'cqcx'$/;"	v
+mission	run/dkqr/run.py	/^mission = 'dkqr'$/;"	v
+mission	run/jg/run.py	/^mission = 'jg'$/;"	v
+mission	run/pp/run.py	/^mission = 'pp'$/;"	v
+mission	run/xp/run.py	/^mission = 'xp'$/;"	v
+mission	run/xwtd/run.py	/^mission = 'xwtd'$/;"	v
+mission	run/zzxs/run.py	/^mission = 'zzxs'$/;"	v
+mission	run/zzxs_tag/run.py	/^mission = 'zzxs_tag'$/;"	v
+mlp_bias_variable	models/cnn_model_one_layer/model_cnn.py	/^        def mlp_bias_variable(shape):$/;"	f	function:Model.__init__
+mlp_bias_variable	models/cnn_model_one_layer_tag/model_cnn.py	/^        def mlp_bias_variable(shape):$/;"	f	function:Model.__init__
+mlp_weight_variable	models/cnn_model_one_layer/model_cnn.py	/^        def mlp_weight_variable(shape):$/;"	f	function:Model.__init__
+mlp_weight_variable	models/cnn_model_one_layer_tag/model_cnn.py	/^        def mlp_weight_variable(shape):$/;"	f	function:Model.__init__
+norm_lim	run/zzxs_tag_pytorch/config.py	/^norm_lim = 3.0$/;"	v
+pad_list	models/cnn_model_one_layer/utilizer.py	/^def pad_list(lst):$/;"	f
+pad_list	models/cnn_model_one_layer_tag/utilizer.py	/^def pad_list(lst, p):$/;"	f
+pad_list	run/zzxs_tag_pytorch/utilizer.py	/^def pad_list(lst):$/;"	f
+padding	models/cnn_model_one_layer/utilizer.py	/^def padding(l, length):$/;"	f
+padding	models/cnn_model_one_layer_tag/utilizer.py	/^def padding(l, length):$/;"	f
+padding	run/zzxs_tag_pytorch/utilizer.py	/^def padding(l, length):$/;"	f
+parser	run/zzxs_tag_pytorch/main.py	/^parser = argparse.ArgumentParser(description='CNN text classificer')$/;"	v
+prepro_vocab1	data/data_utils/utils.py	/^def prepro_vocab1():$/;"	f
+prepro_vocab1_tag	data/data_utils/utils.py	/^def prepro_vocab1_tag():$/;"	f
+printfun	utils/evaluate_func.py	/^    def printfun():$/;"	f	function:evaluate_func
+put_sub_str_1	data/data_utils/utils.py	/^    def put_sub_str_1(substr, sen, sen_index, index_flag):$/;"	f	function:add_tag_padding
+put_tag	data/data_utils/utils.py	/^    def put_tag(sen):$/;"	f	function:add_tag_padding
+put_tag_110	data/data_utils/utils.py	/^        def put_tag_110(sen):$/;"	f	function:add_tag_padding.put_tag
+put_tag_122	data/data_utils/utils.py	/^        def put_tag_122(sen):$/;"	f	function:add_tag_padding.put_tag
+put_tag_124	data/data_utils/utils.py	/^        def put_tag_124(sen):$/;"	f	function:add_tag_padding.put_tag
+read_data	models/cnn_model_one_layer/utilizer.py	/^def read_data(l):$/;"	f
+read_data	models/cnn_model_one_layer_tag/utilizer.py	/^def read_data(l, dictionary):$/;"	f
+read_data	run/zzxs_tag_pytorch/utilizer.py	/^def read_data(l):$/;"	f
+remove_func	data/data_utils/utils.py	/^    def remove_func(sents):$/;"	f	function:remove_signal
+remove_pos	data/data_utils/utils.py	/^def remove_pos(lines):  # [['我 在 人民广场 吃 炸鸡']...]$/;"	f
+remove_signal	data/data_utils/utils.py	/^def remove_signal(lines):$/;"	f
+root_path	data/data_utils/data_processor.py	/^root_path = sys.path[0]$/;"	v
+root_path	run/cqcx/data_generator.py	/^root_path = '\/'.join(os.path.realpath(__file__).split('\/')[:-4])$/;"	v
+root_path	run/cqcx/run.py	/^root_path = '\/'.join(os.path.realpath(__file__).split('\/')[:-4])$/;"	v
+root_path	run/dkqr/data_generator.py	/^root_path = '\/'.join(os.path.realpath(__file__).split('\/')[:-4])$/;"	v
+root_path	run/dkqr/run.py	/^root_path = '\/'.join(os.path.realpath(__file__).split('\/')[:-4])$/;"	v
+root_path	run/jg/data_generator.py	/^root_path = '\/'.join(os.path.realpath(__file__).split('\/')[:-4])$/;"	v
+root_path	run/jg/run.py	/^root_path = '\/'.join(os.path.realpath(__file__).split('\/')[:-4])$/;"	v
+root_path	run/pp/data_generator.py	/^root_path = '\/'.join(os.path.realpath(__file__).split('\/')[:-4])$/;"	v
+root_path	run/pp/run.py	/^root_path = '\/'.join(os.path.realpath(__file__).split('\/')[:-4])$/;"	v
+root_path	run/xp/data_generator.py	/^root_path = '\/'.join(os.path.realpath(__file__).split('\/')[:-4])$/;"	v
+root_path	run/xp/run.py	/^root_path = '\/'.join(os.path.realpath(__file__).split('\/')[:-4])$/;"	v
+root_path	run/xwtd/data_generator.py	/^root_path = '\/'.join(os.path.realpath(__file__).split('\/')[:-4])$/;"	v
+root_path	run/xwtd/run.py	/^root_path = '\/'.join(os.path.realpath(__file__).split('\/')[:-4])$/;"	v
+root_path	run/zzxs/data_generator.py	/^root_path = '\/'.join(os.path.realpath(__file__).split('\/')[:-4])$/;"	v
+root_path	run/zzxs/run.py	/^root_path = '\/'.join(os.path.realpath(__file__).split('\/')[:-4])$/;"	v
+root_path	run/zzxs_tag/data_generator.py	/^root_path = '\/'.join(os.path.realpath(__file__).split('\/')[:-4])$/;"	v
+root_path	run/zzxs_tag/run.py	/^root_path = '\/'.join(os.path.realpath(__file__).split('\/')[:-4])$/;"	v
+root_path	run/zzxs_tag_pytorch/data_generator_zzxs_tag.py	/^root_path = '\/'.join(os.path.realpath(__file__).split('\/')[:-4])$/;"	v
+root_path	utils/export_func.py	/^root_path = sys.path[0]$/;"	v
+rule_but_bei	run/zzxs_tag_pytorch/fol.py	/^def rule_but_bei(logit_p, rule_logit_ind, w):$/;"	f
+run	run/zzxs_tag_pytorch/main.py	/^def run():$/;"	f
+sheet_head	data/data_utils/data_processor.py	/^    def sheet_head(self):$/;"	m	class:DataProcessor
+sheet_ncols	data/data_utils/data_processor.py	/^    def sheet_ncols(self):$/;"	m	class:DataProcessor
+sheet_nrows	data/data_utils/data_processor.py	/^    def sheet_nrows(self):$/;"	m	class:DataProcessor
+smart_show	utils/smart_show.py	/^def smart_show(model_result, limit_probability=0.5, relative_probability=0.0, multilabel=False):$/;"	f
+some_func	data/data_utils/utils.py	/^    def some_func(sents):$/;"	f	function:remove_pos
+somefun	data/data_utils/data_generator.py	/^    def somefun():$/;"	m	class:YouGenerator
+somefun	data/data_utils/data_generator_zzxs.py	/^    def somefun(self):$/;"	m	class:YouGenerator
+sub_func	data/data_utils/utils.py	/^    def sub_func(sents):$/;"	f	function:sub_name_zzxs
+sub_func	data/data_utils/utils.py	/^    def sub_func(sents):$/;"	f	function:sub_num
+sub_name_zzxs	data/data_utils/utils.py	/^def sub_name_zzxs(lines):$/;"	f
+sub_num	data/data_utils/utils.py	/^def sub_num(lines):$/;"	f
+sub_num_name_add_padding	data/data_utils/utils.py	/^def sub_num_name_add_padding(lines):$/;"	f
+sub_num_name_add_padding_tag	data/data_utils/utils.py	/^def sub_num_name_add_padding_tag(lines):$/;"	f
+test	data/data_utils/data_processor.py	/^    test = DataProcessor(file_path='zzxs.xlsx', model_name='zzxs', tokenizer_tool='thulac',)$/;"	v
+test	models/cnn_model_one_layer/model_cnn.py	/^    def test(self, sess, w, sl, y, batch_size):$/;"	m	class:Model
+test	models/cnn_model_one_layer_tag/model_cnn.py	/^    def test(self, sess, w, t, sl, y, batch_size):$/;"	m	class:Model
+timedelay_num	run/zzxs_tag_pytorch/config.py	/^timedelay_num = 20$/;"	v
+train	models/cnn_model_one_layer/model_cnn.py	/^    def train(self, w, sl, y):$/;"	m	class:Model
+train	models/cnn_model_one_layer_tag/model_cnn.py	/^    def train(self, w, t, sl, y):$/;"	m	class:Model
+train	run/cqcx/run.py	/^def train(train_data_path, test_data_path, path_prefix, fold):$/;"	f
+train	run/dkqr/run.py	/^def train(train_data_path, test_data_path, path_prefix, fold):$/;"	f
+train	run/jg/run.py	/^def train(train_data_path, test_data_path, path_prefix, fold):$/;"	f
+train	run/pp/run.py	/^def train(train_data_path, test_data_path, path_prefix, fold):$/;"	f
+train	run/xp/run.py	/^def train(train_data_path, test_data_path, path_prefix, fold):$/;"	f
+train	run/xwtd/run.py	/^def train(train_data_path, test_data_path, path_prefix, fold):$/;"	f
+train	run/zzxs/run.py	/^def train(train_data_path, test_data_path, path_prefix, fold):$/;"	f
+train	run/zzxs_tag/run.py	/^def train(train_data_path, test_data_path, path_prefix, fold):$/;"	f
+train	run/zzxs_tag_pytorch/train.py	/^def train(train_iter, dev_iter, test_iter, model, word_embedding, args):$/;"	f
+value_single	run/zzxs_tag_pytorch/fol.py	/^    def value_single(self, x, y, f):$/;"	m	class:FOL
+value_single	run/zzxs_tag_pytorch/fol.py	/^    def value_single(self, x, y, f):$/;"	m	class:FOL_But
+write_pkl	data/data_utils/utils.py	/^        def write_pkl():$/;"	f	function:cv
+write_txt	data/data_utils/utils.py	/^        def write_txt():$/;"	f	function:cv
