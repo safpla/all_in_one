@@ -27,9 +27,9 @@ np.set_printoptions(linewidth=200)
 
 mission = 'focus_hierarchical_supervision'
 mission_data = 'focus_hierarchical_supervision'
-config = config_utils.Config()(root_path + '/all_in_one/config/' + mission + '/config.ini')['model_parameter']
 
-def train(train_data_path, valid_data_path, test_data_path, path_prefix, load_model=None):
+def train(train_data_path, valid_data_path, test_data_path, path_prefix, config,
+          load_model=None):
     embedding_path = path_prefix + mission_data + '_word_embedding.pkl'
     word_dict_path = path_prefix + mission_data + '_vocab_inword.pkl'
     label_dict_path = path_prefix + mission_data + '_label_class_mapping.pkl'
@@ -122,15 +122,17 @@ def train(train_data_path, valid_data_path, test_data_path, path_prefix, load_mo
     if load_model:
         model.load_model(sess, load_model)
     saver = tf.train.Saver(max_to_keep=10)
-    model_name = 'batch_size_{}-filter_num_{}-filter_lengths_{}-lossweights_{}-sepa_conv_{}-class{}-dfdt-pp_{}-y_dis_{}-round2-data18'.format(
+    model_name = 'batch_size_{}-filter_num_{}-filter_lengths_{}-dfdt_only_{}-lossweights_{}-sepa_conv_{}-class{}-pp_{}-y_dis_{}-round{}-data18'.format(
         config['batch_size'],
         config['filter_num'],
         config['filter_lengths'],
+        config['dfdt_only'],
         config['loss_weights'],
         config['sepa_conv'],
         config['iClass'],
         config['layer_postprocess_sequence'],
-        config['y_dis_mode'])
+        config['y_dis_mode'],
+        config['round_num'])
 
     export_dir_ = root_path + '/all_in_one/demo/exported_models/' + mission
     if not os.path.exists(export_dir_):
@@ -256,7 +258,7 @@ def train(train_data_path, valid_data_path, test_data_path, path_prefix, load_mo
             start_time = time.time()
 
     print('\nModel saved at {}'.format(export_dir_))
-    input_file = os.apth.join(root_path, 'focus/Data/dc_labeled/labeled-Focus4Project-189-2018.01.09-test.json')
+    input_file = os.path.join(root_path, 'focus/Data/dc_labeled/labeled-Focus4Project-189-2018.01.09-test.json')
     method = 2
     watch_class = 2
     graph_path = 'cnn_model_hierarchical_supervision'
@@ -264,7 +266,11 @@ def train(train_data_path, valid_data_path, test_data_path, path_prefix, load_mo
     compare_fn(input_file, method, watch_class, model_name, graph_path, graph_name)
 
 
-def main(_):
+def main(argv):
+    config_file = argv[1]
+    round_num = argv[2]
+    config = config_utils.Config()(root_path + '/all_in_one/config/' + mission + '/' + config_file)['model_parameter']
+    config["round_num"] = round_num
     accs_label = []
     recalls_label = []
     precisions_label = []
@@ -279,7 +285,8 @@ def main(_):
                                   'focus_hierarchical_supervision/'
                                   'batch_size_1-norm_lim_3.0-grad_lim_5.0-filter_num_300-lossweight_0_0_1/')
     #train(train_data_path, valid_data_path, test_data_path, path_prefix, load_model=checkpoint_dir)
-    train(train_data_path, valid_data_path, test_data_path, path_prefix, load_model=None)
+    train(train_data_path, valid_data_path, test_data_path, path_prefix, config,
+          load_model=None)
 
 
 if __name__ == '__main__':

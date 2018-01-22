@@ -123,6 +123,7 @@ class Model:
         filter_num = int(config['filter_num'])
         filter_lengths = [int(fl) for fl in config['filter_lengths'].split()]
         loss_weights = [float(lw) for lw in config['loss_weights'].split()]
+        dfdt_only = [int(do) for do in config['dfdt_only'].split()]
         sepa_conv = bool(int(config['sepa_conv']))
 
         hparams = tf.contrib.training.HParams()
@@ -349,16 +350,10 @@ class Model:
 
         with tf.variable_scope("para_reasoning"):
             min_mask_init = [0 for _ in range(num_classes)]
-            #min_mask_init[0] = 1
-            #min_mask_init[1] = 1
-            #min_mask_init[4] = 1
-            #min_mask_init[11] = 1
-
             max_mask_init = [1 for _ in range(num_classes)]
-            #max_mask_init[0] = 0
-            #max_mask_init[1] = 0
-            #max_mask_init[4] = 0
-            #max_mask_init[11] = 0
+            for i in dfdt_only:
+                min_mask_init[i] = 1
+                max_mask_init[i] = 0
 
             min_mask = tf.constant(min_mask_init, dtype=dfdt_logits.dtype)
             max_mask = tf.constant(max_mask_init, dtype=dfdt_logits.dtype)

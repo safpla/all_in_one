@@ -119,8 +119,8 @@ def train(train_data_path, test_data_path, path_prefix, fold, load_model=False):
 
     model = main_model.Model(label_class, maxlen, W_embedding, label_dict, Y_distribution_config, config,
                              multilabel=is_multilabel)
-    #model.load_model(sess, checkpoint_dir='/home/xuhaowen/GitHub/all_in_one/'
-    #                 'demo/exported_models/focus/1_batch_size_16-norm_lim_3.0-grad_lim_5.0-filter_num_300')
+    model.load_model(sess, checkpoint_dir='/home/xuhaowen/GitHub/all_in_one/'
+                     'demo/exported_models/focus/1_batch_size_16-norm_lim_3.0-grad_lim_5.0-filter_num_300-round1-data18')
 
     sess.run(tf.global_variables_initializer())
     saver = tf.train.Saver(max_to_keep=10)
@@ -202,7 +202,7 @@ def train(train_data_path, test_data_path, path_prefix, fold, load_model=False):
                     shutil.rmtree(root_path + '/all_in_one/demo/exported_models/' + mission + '/' + str(fold + 1))
                 export_func.export(model, sess, signature_name=mission, version=fold + 1)
 
-                model_name = 'batch_size_{0}-norm_lim_{1}-grad_lim_{2}-filter_num_{3}_multifc_round1'.format(
+                model_name = 'batch_size_{0}-norm_lim_{1}-grad_lim_{2}-filter_num_{3}-round1-data18'.format(
                     config['batch_size'],
                     config['norm_lim'],
                     config['grad_lim'],
@@ -248,6 +248,7 @@ def train(train_data_path, test_data_path, path_prefix, fold, load_model=False):
             sys.stdout.write('\n\n')
 
             start_time = time.time()
+            print(model_name)
 
     return test_label, test_recall, test_precision, is_multilabel, test_label_every_class, test_recall_every_class, test_precision_every_class
 

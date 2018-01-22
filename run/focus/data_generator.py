@@ -29,4 +29,4 @@ def data_generator(excel_name, data_name):
 
 
 if __name__ == '__main__':
-    data_generator('focus_sentence_2018.01.17.xlsx', 'focus')
+    data_generator('focus_sentence_2018.01.18.xlsx', 'focus')
