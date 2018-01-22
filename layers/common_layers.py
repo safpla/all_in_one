@@ -7,9 +7,6 @@ import tensorflow as tf
 def layer_norm(x, filters=None, epsilon=1e-6, name=None, reuse=None):
     """Layer normalize the tensor x, averaging over the last dimension."""
 
-
-
-
 def apply_norm(x, norm_type, depth, epsilon, is_training=True):
     if norm_type == 'layer':
         return layer_norm(x, filters=depth, epsilon=epsilon)

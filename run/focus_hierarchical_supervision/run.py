@@ -106,6 +106,13 @@ def train(train_data_path, valid_data_path, test_data_path, path_prefix, config,
     elif y_dis_mode == 'sqrt':
         Y_distribution_r = {i: np.sqrt(1.0 * (len(Y_train) - v) / v + 1) for i, v in Y_distribution.items()}
         Y_distribution_config = [Y_distribution_r[i] for i in range(len(Y_distribution_r))]
+    elif y_dis_mode == 'six':
+        Y_distribution_r = {i: np.sqrt(1.0 * (len(Y_train) - v) / v + 1) for i, v in Y_distribution.items()}
+        Y_distribution_config = [Y_distribution_r[i] for i in range(len(Y_distribution_r))]
+        major_six = [1, 2, 4, 11, 14, 15]
+        for i in range(num_classes):
+            if i not in major_six:
+                Y_distribution_config[i] = 0
     else:
         Y_distribution_config = [1] * num_classes
     print('Y_distribution_r', Y_distribution_config)
