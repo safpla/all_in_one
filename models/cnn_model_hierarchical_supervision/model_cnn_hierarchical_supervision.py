@@ -369,8 +369,6 @@ class Model:
             docu_logits = tf.clip_by_value(docu_logits, clip_value_min=1e-6, clip_value_max=1.0-1e-6)
             docu_loss = -tf.reduce_sum(self.docu_label_plh * tf.log(docu_logits) * self.y_distribution
                                                       + (1 - self.docu_label_plh) * tf.log(1 - docu_logits), reduction_indices=[0])
-            docu_loss = -tf.reduce_sum(self.docu_label_plh * tf.log(docu_logits)
-                                                      + (1 - self.docu_label_plh) * tf.log(1 - docu_logits), reduction_indices=[0])
             self.docu_logits = docu_logits
             self.docu_loss = docu_loss
 
