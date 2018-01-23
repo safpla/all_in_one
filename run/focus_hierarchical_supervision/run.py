@@ -89,6 +89,7 @@ def train(train_data_path, valid_data_path, test_data_path, path_prefix, config,
 
     Y_distribution = {}
     labels = []
+    Y_distribution_config = []
     for feature in train_data:
         dfdt_label = feature['dfdt_label']
         court_label = feature['court_label']
@@ -102,19 +103,33 @@ def train(train_data_path, valid_data_path, test_data_path, path_prefix, config,
                 Y_distribution[i] += 1
     if y_dis_mode == 'log':
         Y_distribution_r = {i: np.log(1.0 * (len(labels) - v) / v + 1) for i, v in Y_distribution.items()}
-        Y_distribution_config = [Y_distribution_r[i] for i in range(len(Y_distribution_r))]
+        Y_distribution_config.append([Y_distribution_r[i] for i in range(len(Y_distribution_r))])
+        Y_distribution_config.append([1] * len(Y_distribution_config[0]))
     elif y_dis_mode == 'sqrt':
-        Y_distribution_r = {i: np.sqrt(1.0 * (len(Y_train) - v) / v + 1) for i, v in Y_distribution.items()}
-        Y_distribution_config = [Y_distribution_r[i] for i in range(len(Y_distribution_r))]
-    elif y_dis_mode == 'six':
-        Y_distribution_r = {i: np.sqrt(1.0 * (len(Y_train) - v) / v + 1) for i, v in Y_distribution.items()}
-        Y_distribution_config = [Y_distribution_r[i] for i in range(len(Y_distribution_r))]
+        Y_distribution_r = {i: np.sqrt(1.0 * (len(labels) - v) / v + 1) for i, v in Y_distribution.items()}
+        Y_distribution_config.append([Y_distribution_r[i] for i in range(len(Y_distribution_r))])
+        Y_distribution_config.append([1] * len(Y_distribution_config[0]))
+    elif y_dis_mode == 'major_six':
+        Y_distribution_r = {i: np.sqrt(1.0 * (len(labels) - v) / v + 1) for i, v in Y_distribution.items()}
+        Y_distribution_config.append([Y_distribution_r[i] for i in range(len(Y_distribution_r))])
+        Y_distribution_config.append([1] * len(Y_distribution_config[0]))
         major_six = [1, 2, 4, 11, 14, 15]
         for i in range(num_classes):
             if i not in major_six:
-                Y_distribution_config[i] = 0
+                Y_distribution_config[0][i] = 0
+                Y_distribution_config[1][i] = 0
+    elif y_dis_mode == 'refine_2':
+        Y_distribution_r = {i: np.sqrt(1.0 * (len(labels) - v) / v + 1) for i, v in Y_distribution.items()}
+        Y_distribution_config.append([Y_distribution_r[i] for i in range(len(Y_distribution_r))])
+        Y_distribution_config.append([1] * len(Y_distribution_config[0]))
+        for i in range(num_classes):
+            if i != 2:
+                Y_distribution_config[0][i] = 0
+                Y_distribution_config[1][i] = 0
     else:
-        Y_distribution_config = [1] * num_classes
+        Y_distribution_config.append([1] * num_classes)
+        Y_distribution_config.append([1] * num_classes)
+
     print('Y_distribution_r', Y_distribution_config)
 
     tf.reset_default_graph()
@@ -129,7 +144,7 @@ def train(train_data_path, valid_data_path, test_data_path, path_prefix, config,
     if load_model:
         model.load_model(sess, load_model)
     saver = tf.train.Saver(max_to_keep=10)
-    model_name = 'batch_size_{}-filter_num_{}-filter_lengths_{}-dfdt_only_{}-lossweights_{}-sepa_conv_{}-class{}-pp_{}-y_dis_{}-round{}-data18'.format(
+    model_name = 'batch_size_{}-filter_num_{}-filter_lengths_{}-dfdt_only_{}-lossweights_{}-sepa_conv_{}-class{}-pp_{}-y_dis_{}-round{}-{}'.format(
         config['batch_size'],
         config['filter_num'],
         config['filter_lengths'],
@@ -139,7 +154,8 @@ def train(train_data_path, valid_data_path, test_data_path, path_prefix, config,
         config['iClass'],
         config['layer_postprocess_sequence'],
         config['y_dis_mode'],
-        config['round_num'])
+        config['round_num'],
+        mission_data)
 
     export_dir_ = root_path + '/all_in_one/demo/exported_models/' + mission
     if not os.path.exists(export_dir_):
@@ -265,7 +281,7 @@ def train(train_data_path, valid_data_path, test_data_path, path_prefix, config,
             start_time = time.time()
 
     print('\nModel saved at {}'.format(export_dir_))
-    input_file = os.path.join(root_path, 'focus/Data/dc_labeled/labeled-Focus4Project-189-2018.01.09-test.json')
+    input_file = os.path.join(root_path, 'focus/Data/dc_labeled/labeled-Focus4Project-189-2018.01.22-test.json')
     method = 2
     watch_class = 2
     graph_path = 'cnn_model_hierarchical_supervision'
@@ -290,8 +306,8 @@ def main(argv):
 
     checkpoint_dir = os.path.join(root_path, 'all_in_one/demo/exported_models/'
                                   'focus_hierarchical_supervision/'
-                                  'batch_size_1-norm_lim_3.0-grad_lim_5.0-filter_num_300-lossweight_0_0_1/')
-    #train(train_data_path, valid_data_path, test_data_path, path_prefix, load_model=checkpoint_dir)
+                                  'batch_size_1-filter_num_100-filter_lengths_1 2 3 4 5-dfdt_only_1 2-lossweights_0.25 0.25 0.5-sepa_conv_1-class-1-pp_none-y_dis_log-roundnopp-data11/')
+    #train(train_data_path, valid_data_path, test_data_path, path_prefix, config, load_model=checkpoint_dir)
     train(train_data_path, valid_data_path, test_data_path, path_prefix, config,
           load_model=None)
 

@@ -2,8 +2,6 @@
 # __author__ == 'Xu Haowen'
 import tensorflow as tf
 
-
-
 def layer_norm(x, filters=None, epsilon=1e-6, name=None, reuse=None):
     """Layer normalize the tensor x, averaging over the last dimension."""
 

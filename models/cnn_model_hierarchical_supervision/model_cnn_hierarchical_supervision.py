@@ -222,8 +222,10 @@ class Model:
                 else:
                     logits = tf.nn.softmax(h_outputs)
                 logits = tf.clip_by_value(logits, clip_value_min=1e-6, clip_value_max=1.0 - 1e-6)
-                loss = tf.reduce_mean(-tf.reduce_sum(label * tf.log(logits) * self.y_distribution
-                                                                + (1 - label) * tf.log(1 - logits), reduction_indices=[1]))
+                loss = tf.reduce_mean(-tf.reduce_sum(
+                    label * tf.log(logits) * self.y_distribution[0]
+                    + (1 - label) * tf.log(1 - logits) * self.y_distribution[1],
+                    reduction_indices=[1]))
 
                 # max pooling over sentences
                 logits_para = tf.reduce_max(logits, axis=0)
@@ -250,26 +252,26 @@ class Model:
                             conv = conv1d(inputs, conv_Ws[i], conv_bs[i])
                             cnn_outputs.append(conv)
 
-                        #cnn_outputs_concat = tf.concat(cnn_outputs, 2)
+                        cnn_outputs_concat = tf.concat(cnn_outputs, 2)
                         # concat and layer postprocess
-                        cnn_outputs_concat = layer_postprocess(
-                            None,
-                            tf.concat(cnn_outputs, 2),
-                            hparams,
-                            is_training=self.is_training)
+                        #cnn_outputs_concat = layer_postprocess(
+                        #    None,
+                        #    tf.concat(cnn_outputs, 2),
+                        #    hparams,
+                        #    is_training=self.is_training)
                         cnn_outputs_concat_act = tf.nn.relu(cnn_outputs_concat, name='relu')
 
-                        #label_hidden_state = tf.reduce_max(cnn_outputs_concat_act, axis=1)
-                        #label_hidden_state = tf.layers.dropout(label_hidden_state,
-                        #                                       rate=0.5,
-                        #                                       training=self.is_training)
+                        label_hidden_state = tf.reduce_max(cnn_outputs_concat_act, axis=1)
+                        label_hidden_state = tf.layers.dropout(label_hidden_state,
+                                                               rate=0.5,
+                                                               training=self.is_training)
                         # max pooling over kernels and dropout
-                        label_hidden_state = layer_postprocess(
-                            None,
-                            tf.reduce_max(cnn_outputs_concat_act, axis=1),
-                            hparams,
-                            sequence='d',
-                            is_training=self.is_training)
+                        #label_hidden_state = layer_postprocess(
+                        #    None,
+                        #    tf.reduce_max(cnn_outputs_concat_act, axis=1),
+                        #    hparams,
+                        #    sequence='d',
+                        #    is_training=self.is_training)
 
                         # one layer mlp
                         #label_W = mlp_weight_variable([cnn_size, 1])
@@ -297,8 +299,10 @@ class Model:
                 else:
                     logits = tf.nn.softmax(h_outputs_concat)
                 logits = tf.clip_by_value(logits, clip_value_min=1e-6, clip_value_max=1.0 - 1e-6)
-                loss = tf.reduce_mean(-tf.reduce_sum(label * tf.log(logits) * self.y_distribution
-                                                                + (1 - label) * tf.log(1 - logits), reduction_indices=[1]))
+                loss = tf.reduce_mean(-tf.reduce_sum(
+                    label * tf.log(logits) * self.y_distribution[0]
+                    + (1 - label) * tf.log(1 - logits) * self.y_distribution[1],
+                    reduction_indices=[1]))
 
                 # max pooling over sentences
                 logits_para = tf.reduce_max(logits, axis=0)
@@ -367,8 +371,9 @@ class Model:
                            tf.reduce_max(tf.stack([dfdt_logits * max_mask, court_logits * max_mask]), axis=0))
 
             docu_logits = tf.clip_by_value(docu_logits, clip_value_min=1e-6, clip_value_max=1.0-1e-6)
-            docu_loss = -tf.reduce_sum(self.docu_label_plh * tf.log(docu_logits) * self.y_distribution
-                                                      + (1 - self.docu_label_plh) * tf.log(1 - docu_logits), reduction_indices=[0])
+            docu_loss = -tf.reduce_sum(self.docu_label_plh * tf.log(docu_logits) * self.y_distribution[0]
+                                       + (1 - self.docu_label_plh) * tf.log(1 - docu_logits) * self.y_distribution[1],
+                                       reduction_indices=[0])
             self.docu_logits = docu_logits
             self.docu_loss = docu_loss
 

@@ -199,7 +199,6 @@ if __name__ == '__main__':
     num_classes = 20
     data_generator(input_json_file, output_json_path, num_classes,
                    mode='Train_Valid')
-    exit()
-    input_json_file = os.path.join(root_path, 'all_in_one/data/data_json/labeled-Focus4Project-189-2018.01.09-test.json')
+    input_json_file = os.path.join(root_path, 'all_in_one/data/data_json/labeled-Focus4Project-189-2018.01.22-test.json')
     data_generator(input_json_file, output_json_path, num_classes,
                    mode='Test')

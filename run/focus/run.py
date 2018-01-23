@@ -119,8 +119,8 @@ def train(train_data_path, test_data_path, path_prefix, fold, load_model=False):
 
     model = main_model.Model(label_class, maxlen, W_embedding, label_dict, Y_distribution_config, config,
                              multilabel=is_multilabel)
-    model.load_model(sess, checkpoint_dir='/home/xuhaowen/GitHub/all_in_one/'
-                     'demo/exported_models/focus/1_batch_size_16-norm_lim_3.0-grad_lim_5.0-filter_num_300-round1-data18')
+    #model.load_model(sess, checkpoint_dir='/home/xuhaowen/GitHub/all_in_one/'
+    #                 'demo/exported_models/focus/1_batch_size_16-norm_lim_3.0-grad_lim_5.0-filter_num_300-round1-data18')
 
     sess.run(tf.global_variables_initializer())
     saver = tf.train.Saver(max_to_keep=10)
@@ -315,8 +315,6 @@ def main(_):
         df.to_excel(writer,'Sheet1')
         writer.save()
     f_log.close()
-
-
 
 
 if __name__ == '__main__':
