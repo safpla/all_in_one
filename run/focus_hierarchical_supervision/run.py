@@ -286,7 +286,7 @@ def train(train_data_path, valid_data_path, test_data_path, path_prefix, config,
     watch_class = 2
     graph_path = 'cnn_model_hierarchical_supervision'
     graph_name = 'model_cnn_hierarchical_supervision'
-    compare_fn(input_file, method, watch_class, model_name, graph_path, graph_name)
+    compare_fn(input_file, method, watch_class, model_name, graph_path, graph_name, config)
 
 
 def main(argv):
