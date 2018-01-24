@@ -37,6 +37,7 @@ def train(train_data_path, valid_data_path, test_data_path, path_prefix, config,
     batch_size = int(config['batch_size'])
     checkpoint_num = int(config['checkpoint_num'])
     timedelay_num = int(config['timedelay_num'])
+    num_classes = int(config['num_classes'])
     y_dis_mode = config['y_dis_mode']
     print('Loading Data...')
 
@@ -49,24 +50,51 @@ def train(train_data_path, valid_data_path, test_data_path, path_prefix, config,
         train_data = json.load(f)
         train_data_temp = []
         for data in train_data:
-            if data['dfdt_input'] != [] and data['court_input'] != []:
-                train_data_temp.append(data)
+            if data['dfdt_input'] == []:
+                data['dfdt_input'] = [[0] * 8]
+                data['dfdt_label'] = [[0] * num_classes]
+                data['dfdt_sl'] = [8]
+            if data['court_input'] == []:
+                data['court_input'] = [[0] * 8]
+                data['court_label'] = [[0] * num_classes]
+                data['court_sl'] = [8]
+            train_data_temp.append(data)
+            #if data['dfdt_input'] != [] and data['court_input'] != []:
+            #    train_data_temp.append(data)
         train_data = train_data_temp
 
     with open(valid_data_path, 'r') as f:
         valid_data = json.load(f)
         valid_data_temp = []
         for data in valid_data:
-            if data['dfdt_input'] != [] and data['court_input'] != []:
-                valid_data_temp.append(data)
+            if data['dfdt_input'] == []:
+                data['dfdt_input'] = [[0] * 8]
+                data['dfdt_label'] = [[0] * num_classes]
+                data['dfdt_sl'] = [8]
+            if data['court_input'] == []:
+                data['court_input'] = [[0] * 8]
+                data['court_label'] = [[0] * num_classes]
+                data['court_sl'] = [8]
+            valid_data_temp.append(data)
+            #if data['dfdt_input'] != [] and data['court_input'] != []:
+            #    valid_data_temp.append(data)
         valid_data = valid_data_temp
 
     with open(test_data_path, 'r') as f:
         test_data = json.load(f)
         test_data_temp = []
         for data in test_data:
-            if data['dfdt_input'] != [] and data['court_input'] != []:
-                test_data_temp.append(data)
+            if data['dfdt_input'] == []:
+                data['dfdt_input'] = [[0] * 8]
+                data['dfdt_label'] = [[0] * num_classes]
+                data['dfdt_sl'] = [8]
+            if data['court_input'] == []:
+                data['court_input'] = [[0] * 8]
+                data['court_label'] = [[0] * num_classes]
+                data['court_sl'] = [8]
+            test_data_temp.append(data)
+            #if data['dfdt_input'] != [] and data['court_input'] != []:
+            #    test_data_temp.append(data)
         test_data = test_data_temp
 
     embedding_file = open(embedding_path, 'rb')
@@ -77,7 +105,6 @@ def train(train_data_path, valid_data_path, test_data_path, path_prefix, config,
     maxlen = embeddings['maxlen']
 
     is_multilabel = True
-    num_classes = len(train_data[0]['dfdt_label'][0])
 
     print('train length:', len(train_data))
     print('dev length:', len(valid_data))
@@ -118,12 +145,13 @@ def train(train_data_path, valid_data_path, test_data_path, path_prefix, config,
             if i not in major_six:
                 Y_distribution_config[0][i] = 0
                 Y_distribution_config[1][i] = 0
-    elif y_dis_mode == 'refine_2':
+    elif y_dis_mode.split('_')[0] == 'refine':
         Y_distribution_r = {i: np.sqrt(1.0 * (len(labels) - v) / v + 1) for i, v in Y_distribution.items()}
         Y_distribution_config.append([Y_distribution_r[i] for i in range(len(Y_distribution_r))])
         Y_distribution_config.append([1] * len(Y_distribution_config[0]))
+        refine_class = int(y_dis_mode.split('_')[1])
         for i in range(num_classes):
-            if i != 2:
+            if i != refine_class:
                 Y_distribution_config[0][i] = 0
                 Y_distribution_config[1][i] = 0
     else:
