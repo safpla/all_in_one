@@ -209,7 +209,7 @@ class Model:
                 with tf.name_scope('fc_1'):
                     hidden_dim = int(config['hidden_dim'])
                     label_W1 = mlp_weight_variable([cnn_size, hidden_dim])
-                    label_b1= mlp_bias_variable([hidden_dim])
+                    label_b1 = mlp_bias_variable([hidden_dim])
                     hidden = tf.matmul(label_hidden_state, label_W1) + label_b1
                     hidden = tf.nn.relu(hidden, name='relu_1')
                 with tf.name_scope('fc_2'):
@@ -252,26 +252,26 @@ class Model:
                             conv = conv1d(inputs, conv_Ws[i], conv_bs[i])
                             cnn_outputs.append(conv)
 
-                        cnn_outputs_concat = tf.concat(cnn_outputs, 2)
+                        #cnn_outputs_concat = tf.concat(cnn_outputs, 2)
                         # concat and layer postprocess
-                        #cnn_outputs_concat = layer_postprocess(
-                        #    None,
-                        #    tf.concat(cnn_outputs, 2),
-                        #    hparams,
-                        #    is_training=self.is_training)
+                        cnn_outputs_concat = layer_postprocess(
+                            None,
+                            tf.concat(cnn_outputs, 2),
+                            hparams,
+                            is_training=self.is_training)
                         cnn_outputs_concat_act = tf.nn.relu(cnn_outputs_concat, name='relu')
 
-                        label_hidden_state = tf.reduce_max(cnn_outputs_concat_act, axis=1)
-                        label_hidden_state = tf.layers.dropout(label_hidden_state,
-                                                               rate=0.5,
-                                                               training=self.is_training)
+                        #label_hidden_state = tf.reduce_max(cnn_outputs_concat_act, axis=1)
+                        #label_hidden_state = tf.layers.dropout(label_hidden_state,
+                        #                                       rate=0.5,
+                        #                                       training=self.is_training)
                         # max pooling over kernels and dropout
-                        #label_hidden_state = layer_postprocess(
-                        #    None,
-                        #    tf.reduce_max(cnn_outputs_concat_act, axis=1),
-                        #    hparams,
-                        #    sequence='d',
-                        #    is_training=self.is_training)
+                        label_hidden_state = layer_postprocess(
+                            None,
+                            tf.reduce_max(cnn_outputs_concat_act, axis=1),
+                            hparams,
+                            sequence='d',
+                            is_training=self.is_training)
 
                         # one layer mlp
                         #label_W = mlp_weight_variable([cnn_size, 1])
@@ -282,7 +282,7 @@ class Model:
                         with tf.name_scope('fc_1'):
                             hidden_dim = int(config['hidden_dim'])
                             label_W1 = mlp_weight_variable([cnn_size, hidden_dim])
-                            label_b1= mlp_bias_variable([hidden_dim])
+                            label_b1 = mlp_bias_variable([hidden_dim])
                             hidden = tf.matmul(label_hidden_state, label_W1) + label_b1
                             hidden = tf.nn.relu(hidden, name='relu_1')
                         with tf.name_scope('fc_2'):
@@ -309,17 +309,16 @@ class Model:
 
                 return logits_para, logits, loss
 
-
         # word embedding
         with tf.device('/cpu:0'), tf.name_scope('word_embedding'):
             word_embedding_table = tf.Variable(np.asarray(self.w_embedding),
-                                              name='word_embedding_table')
+                                               name='word_embedding_table')
             dfdt_input_embedded = tf.nn.embedding_lookup(word_embedding_table,
-                                                self.dfdt_input_plh,
-                                                name='dfdt_embedded')
+                                                         self.dfdt_input_plh,
+                                                         name='dfdt_embedded')
             court_input_embedded = tf.nn.embedding_lookup(word_embedding_table,
-                                                 self.court_input_plh,
-                                                 name='court_embedded')
+                                                          self.court_input_plh,
+                                                          name='court_embedded')
 
         with tf.variable_scope("dfdt"):
             if sepa_conv:
