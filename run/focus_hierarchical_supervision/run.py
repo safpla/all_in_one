@@ -53,51 +53,51 @@ def train(train_data_path, valid_data_path, test_data_path, path_prefix, config,
         train_data = json.load(f)
         train_data_temp = []
         for data in train_data:
-            if data['dfdt_input'] == []:
-                data['dfdt_input'] = [[0] * 8]
-                data['dfdt_label'] = [[0] * num_classes]
-                data['dfdt_sl'] = [8]
-            if data['court_input'] == []:
-                data['court_input'] = [[0] * 8]
-                data['court_label'] = [[0] * num_classes]
-                data['court_sl'] = [8]
-            train_data_temp.append(data)
-            #if data['dfdt_input'] != [] and data['court_input'] != []:
-            #    train_data_temp.append(data)
+            #if data['dfdt_input'] == []:
+            #    data['dfdt_input'] = [[0] * 8]
+            #    data['dfdt_label'] = [[0] * num_classes]
+            #    data['dfdt_sl'] = [8]
+            #if data['court_input'] == []:
+            #    data['court_input'] = [[0] * 8]
+            #    data['court_label'] = [[0] * num_classes]
+            #    data['court_sl'] = [8]
+            #train_data_temp.append(data)
+            if data['dfdt_input'] != [] and data['court_input'] != []:
+                train_data_temp.append(data)
         train_data = train_data_temp
 
     with open(valid_data_path, 'r') as f:
         valid_data = json.load(f)
         valid_data_temp = []
         for data in valid_data:
-            if data['dfdt_input'] == []:
-                data['dfdt_input'] = [[0] * 8]
-                data['dfdt_label'] = [[0] * num_classes]
-                data['dfdt_sl'] = [8]
-            if data['court_input'] == []:
-                data['court_input'] = [[0] * 8]
-                data['court_label'] = [[0] * num_classes]
-                data['court_sl'] = [8]
-            valid_data_temp.append(data)
-            #if data['dfdt_input'] != [] and data['court_input'] != []:
-            #    valid_data_temp.append(data)
+            #if data['dfdt_input'] == []:
+            #    data['dfdt_input'] = [[0] * 8]
+            #    data['dfdt_label'] = [[0] * num_classes]
+            #    data['dfdt_sl'] = [8]
+            #if data['court_input'] == []:
+            #    data['court_input'] = [[0] * 8]
+            #    data['court_label'] = [[0] * num_classes]
+            #    data['court_sl'] = [8]
+            #valid_data_temp.append(data)
+            if data['dfdt_input'] != [] and data['court_input'] != []:
+                valid_data_temp.append(data)
         valid_data = valid_data_temp
 
     with open(test_data_path, 'r') as f:
         test_data = json.load(f)
         test_data_temp = []
         for data in test_data:
-            if data['dfdt_input'] == []:
-                data['dfdt_input'] = [[0] * 8]
-                data['dfdt_label'] = [[0] * num_classes]
-                data['dfdt_sl'] = [8]
-            if data['court_input'] == []:
-                data['court_input'] = [[0] * 8]
-                data['court_label'] = [[0] * num_classes]
-                data['court_sl'] = [8]
-            test_data_temp.append(data)
-            #if data['dfdt_input'] != [] and data['court_input'] != []:
-            #    test_data_temp.append(data)
+            #if data['dfdt_input'] == []:
+            #    data['dfdt_input'] = [[0] * 8]
+            #    data['dfdt_label'] = [[0] * num_classes]
+            #    data['dfdt_sl'] = [8]
+            #if data['court_input'] == []:
+            #    data['court_input'] = [[0] * 8]
+            #    data['court_label'] = [[0] * num_classes]
+            #    data['court_sl'] = [8]
+            #test_data_temp.append(data)
+            if data['dfdt_input'] != [] and data['court_input'] != []:
+                test_data_temp.append(data)
         test_data = test_data_temp
 
     embedding_file = open(embedding_path, 'rb')

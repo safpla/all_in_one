@@ -241,7 +241,8 @@ class Model:
                         # if loss weight is 0, then ignore this label
                         # else, doing convolution
                         if (self.y_distribution[0][iClass] == 0 and
-                            self.y_distribution[1][iClass] == 0):
+                            self.y_distribution[1][iClass] == 0 and
+                            config['round_num'] == 'ignore_on'):
                             h_outputs_oneclass = tf.zeros([tf.shape(inputs)[0], 1],
                                                              dtype=tf.float32)
                         else:
