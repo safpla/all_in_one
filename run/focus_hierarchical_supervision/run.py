@@ -1,3 +1,6 @@
+# coding=utf-8
+# __author__ == 'Haowen Xu'
+
 import tensorflow as tf
 import numpy as np
 import time
@@ -146,8 +149,10 @@ def train(train_data_path, valid_data_path, test_data_path, path_prefix, config,
                 Y_distribution_config[0][i] = 0
                 Y_distribution_config[1][i] = 0
     elif y_dis_mode.split('_')[0] == 'refine':
-        Y_distribution_r = {i: np.sqrt(1.0 * (len(labels) - v) / v + 1) for i, v in Y_distribution.items()}
-        Y_distribution_config.append([Y_distribution_r[i] for i in range(len(Y_distribution_r))])
+        #Y_distribution_r = {i: np.sqrt(1.0 * (len(labels) - v) / v + 1) for i, v in Y_distribution.items()}
+        #Y_distribution_config.append([Y_distribution_r[i] for i in range(len(Y_distribution_r))])
+        # weighted loss here doesn't provide a better result, try normal loss
+        Y_distribution_config.append([1] * num_classes)
         Y_distribution_config.append([1] * len(Y_distribution_config[0]))
         refine_class = int(y_dis_mode.split('_')[1])
         for i in range(num_classes):
@@ -172,7 +177,7 @@ def train(train_data_path, valid_data_path, test_data_path, path_prefix, config,
     if load_model:
         model.load_model(sess, load_model)
     saver = tf.train.Saver(max_to_keep=10)
-    model_name = 'batch_size_{}-filter_num_{}-filter_lengths_{}-dfdt_only_{}-lossweights_{}-sepa_conv_{}-class{}-pp_{}-y_dis_{}-round{}-{}'.format(
+    model_name = 'batch_size_{}-filter_num_{}-filter_lengths_{}-dfdt_only_{}-lossweights_{}-sepa_conv_{}-class{}-pp_{}-y_dis_{}-round{}-{}-{}'.format(
         config['batch_size'],
         config['filter_num'],
         config['filter_lengths'],
@@ -183,7 +188,8 @@ def train(train_data_path, valid_data_path, test_data_path, path_prefix, config,
         config['layer_postprocess_sequence'],
         config['y_dis_mode'],
         config['round_num'],
-        mission_data)
+        mission_data,
+        config['config_file'])
 
     export_dir_ = root_path + '/all_in_one/demo/exported_models/' + mission
     if not os.path.exists(export_dir_):
@@ -322,6 +328,7 @@ def main(argv):
     round_num = argv[2]
     config = config_utils.Config()(root_path + '/all_in_one/config/' + mission + '/' + config_file)['model_parameter']
     config["round_num"] = round_num
+    config["config_file"] = config_file
     accs_label = []
     recalls_label = []
     precisions_label = []
@@ -334,10 +341,10 @@ def main(argv):
 
     checkpoint_dir = os.path.join(root_path, 'all_in_one/demo/exported_models/'
                                   'focus_hierarchical_supervision/'
-                                  'batch_size_1-filter_num_100-filter_lengths_1 2 3 4 5-dfdt_only_1 2-lossweights_0.25 0.25 0.5-sepa_conv_1-class-1-pp_none-y_dis_log-roundnopp-data11/')
-    #train(train_data_path, valid_data_path, test_data_path, path_prefix, config, load_model=checkpoint_dir)
-    train(train_data_path, valid_data_path, test_data_path, path_prefix, config,
-          load_model=None)
+                                  'batch_size_1-filter_num_300-filter_lengths_1 2 3 4 5-dfdt_only_0 1-lossweights_0.25 0.25 0.5-sepa_conv_1-class-1-pp_none-y_dis_log-round3_log-focus_hierarchical_supervision-config1.1.ini')
+    train(train_data_path, valid_data_path, test_data_path, path_prefix, config, load_model=checkpoint_dir)
+    #train(train_data_path, valid_data_path, test_data_path, path_prefix, config,
+    #      load_model=None)
 
 
 if __name__ == '__main__':

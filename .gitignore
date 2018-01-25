@@ -112,6 +112,5 @@ data/data_json/
 data/data_train/
 data/data_excel/
 data/data_utils/thulac_models/
-*.sh
 nohup*
 

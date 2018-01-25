@@ -238,47 +238,54 @@ class Model:
                 h_outputs = []
                 for iClass in range(num_classes):
                     with tf.name_scope('class_{}'.format(iClass)):
-                        conv_Ws = []
-                        conv_bs = []
-                        for i in filter_lengths:
-                            filter_shape = [i, embedding_dim, filter_num]
-                            conv_W = conv_weight_variable(filter_shape)
-                            conv_b = conv_bias_variable([filter_num])
-                            conv_Ws.append(conv_W)
-                            conv_bs.append(conv_b)
+                        # if loss weight is 0, then ignore this label
+                        # else, doing convolution
+                        if (self.y_distribution[0][iClass] == 0 and
+                            self.y_distribution[1][iClass] == 0):
+                            h_outputs_oneclass = tf.zeros([tf.shape(inputs)[0], 1],
+                                                             dtype=tf.float32)
+                        else:
+                            conv_Ws = []
+                            conv_bs = []
+                            for i in filter_lengths:
+                                filter_shape = [i, embedding_dim, filter_num]
+                                conv_W = conv_weight_variable(filter_shape)
+                                conv_b = conv_bias_variable([filter_num])
+                                conv_Ws.append(conv_W)
+                                conv_bs.append(conv_b)
 
-                        cnn_outputs = []
-                        for i in range(len(filter_lengths)):
-                            conv = conv1d(inputs, conv_Ws[i], conv_bs[i])
-                            cnn_outputs.append(conv)
+                            cnn_outputs = []
+                            for i in range(len(filter_lengths)):
+                                conv = conv1d(inputs, conv_Ws[i], conv_bs[i])
+                                cnn_outputs.append(conv)
 
-                        # concat and layer postprocess
-                        cnn_outputs_concat = layer_postprocess(
-                            None,
-                            tf.concat(cnn_outputs, 2),
-                            hparams,
-                            is_training=self.is_training)
-                        cnn_outputs_concat_act = tf.nn.relu(cnn_outputs_concat, name='relu')
+                            # concat and layer postprocess
+                            cnn_outputs_concat = layer_postprocess(
+                                None,
+                                tf.concat(cnn_outputs, 2),
+                                hparams,
+                                is_training=self.is_training)
+                            cnn_outputs_concat_act = tf.nn.relu(cnn_outputs_concat, name='relu')
 
-                        # max pooling over kernels and dropout
-                        label_hidden_state = layer_postprocess(
-                            None,
-                            tf.reduce_max(cnn_outputs_concat_act, axis=1),
-                            hparams,
-                            sequence='d',
-                            is_training=self.is_training)
+                            # max pooling over kernels and dropout
+                            label_hidden_state = layer_postprocess(
+                                None,
+                                tf.reduce_max(cnn_outputs_concat_act, axis=1),
+                                hparams,
+                                sequence='d',
+                                is_training=self.is_training)
 
-                        # two layer mlp
-                        with tf.name_scope('fc_1'):
-                            hidden_dim = int(config['hidden_dim'])
-                            label_W1 = mlp_weight_variable([cnn_size, hidden_dim])
-                            label_b1 = mlp_bias_variable([hidden_dim])
-                            hidden = tf.matmul(label_hidden_state, label_W1) + label_b1
-                            hidden = tf.nn.relu(hidden, name='relu_1')
-                        with tf.name_scope('fc_2'):
-                            label_W2 = mlp_weight_variable([hidden_dim, 1])
-                            label_b2 = mlp_bias_variable([1])
-                            h_outputs_oneclass = tf.matmul(hidden, label_W2) + label_b2
+                            # two layer mlp
+                            with tf.name_scope('fc_1'):
+                                hidden_dim = int(config['hidden_dim'])
+                                label_W1 = mlp_weight_variable([cnn_size, hidden_dim])
+                                label_b1 = mlp_bias_variable([hidden_dim])
+                                hidden = tf.matmul(label_hidden_state, label_W1) + label_b1
+                                hidden = tf.nn.relu(hidden, name='relu_1')
+                            with tf.name_scope('fc_2'):
+                                label_W2 = mlp_weight_variable([hidden_dim, 1])
+                                label_b2 = mlp_bias_variable([1])
+                                h_outputs_oneclass = tf.matmul(hidden, label_W2) + label_b2
 
                         h_outputs.append(h_outputs_oneclass)
 
