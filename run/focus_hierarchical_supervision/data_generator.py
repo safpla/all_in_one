@@ -167,7 +167,7 @@ def data_generator(input_json_file, output_json_path, num_classes,
     if mode == 'Train_Valid':
         # split train, valid
         features_train = features[: round(len(features) * 0.9)]
-        features_valid = features[round(len(features_train) * 0.9) :]
+        features_valid = features[round(len(features) * 0.9) :]
 
         train_data_file = os.path.join(output_json_path, 'data_train.json')
         valid_data_file = os.path.join(output_json_path, 'data_valid.json')
