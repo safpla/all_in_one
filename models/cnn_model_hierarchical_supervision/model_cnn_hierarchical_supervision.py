@@ -72,41 +72,6 @@ class Model:
             shape=[num_classes], # [class]
             name='docu_label_plh')
 
-        # self.dfdt_input_plh = tf.placeholder(
-        #     dtype=tf.int32,
-        #     shape=[None, None, None], # [document(batch), sentence, word]
-        #     name='dfdt_input_plh')
-
-        # self.dfdt_label_plh = tf.placeholder(
-        #     dtype=tf.float32,
-        #     shape=[None, None, None], # [document(batch), sentence, class]
-        #     name='dfdt_label_plh')
-
-        # self.dfdt_sl_plh = tf.placeholder(
-        #     dtype=tf.int32,
-        #     shape=[None, None], # [document(batch), sentence]
-        #     name='dfdt_sl_plh')
-
-        # self.court_input_plh = tf.placeholder(
-        #     dtype=tf.int32,
-        #     shape[None, None, None], # [document(batch), sentence, word]
-        #     name='court_input_plh')
-
-        # self.court_label_plh = tf.placeholder(
-        #     dtype=tf.float32,
-        #     shape=[None, None, None], # [document(batch), sentence, class]
-        #     name='court_label_plh')
-
-        # self.court_sl_plh = tf.placeholder(
-        #     dtype=tf.int32,
-        #     shape=[None, None], # [document(batch), sentence]
-        #     name='court_sl_plh')
-
-        # self.docu_label_plh = tf.placeholder(
-        #     dtype=tf.float32,
-        #     shape=[None, None], # [document(batch), class]
-        #     name='docu_label_plh')
-
         self.is_training = tf.placeholder(
             dtype=tf.bool,
             shape=[],
@@ -238,12 +203,13 @@ class Model:
                 h_outputs = []
                 for iClass in range(num_classes):
                     with tf.name_scope('class_{}'.format(iClass)):
-                        # if loss weight is 0, then ignore this label
-                        # else, doing convolution
+                        # if loss weight is 0, then ignore this label to speed
+                        # up training, else, doing convolution
                         if (self.y_distribution[0][iClass] == 0 and
                             self.y_distribution[1][iClass] == 0):
                             h_outputs_oneclass = tf.zeros([tf.shape(inputs)[0], 1],
                                                              dtype=tf.float32)
+                            print('ignore class {}'.format(iClass))
                         else:
                             conv_Ws = []
                             conv_bs = []

@@ -29,7 +29,7 @@ np.random.seed(3306)
 np.set_printoptions(linewidth=200)
 
 mission = 'focus_hierarchical_supervision'
-mission_data = 'focus_hierarchical_supervision'
+mission_data = 'focus_hierarchical_supervision_01_25'
 
 def train(train_data_path, valid_data_path, test_data_path, path_prefix, config,
           load_model=None):
@@ -53,6 +53,8 @@ def train(train_data_path, valid_data_path, test_data_path, path_prefix, config,
         train_data = json.load(f)
         train_data_temp = []
         for data in train_data:
+            # The model do not accept empty input for each paragraph,
+            # make up empty sentence for empty paragraph.
             if data['dfdt_input'] == []:
                 data['dfdt_input'] = [[0] * 8]
                 data['dfdt_label'] = [[0] * num_classes]
@@ -62,14 +64,14 @@ def train(train_data_path, valid_data_path, test_data_path, path_prefix, config,
                 data['court_label'] = [[0] * num_classes]
                 data['court_sl'] = [8]
             train_data_temp.append(data)
-            #if data['dfdt_input'] != [] and data['court_input'] != []:
-            #    train_data_temp.append(data)
         train_data = train_data_temp
 
     with open(valid_data_path, 'r') as f:
         valid_data = json.load(f)
         valid_data_temp = []
         for data in valid_data:
+            # The model do not accept empty input for each paragraph,
+            # make up empty sentence for empty paragraph.
             if data['dfdt_input'] == []:
                 data['dfdt_input'] = [[0] * 8]
                 data['dfdt_label'] = [[0] * num_classes]
@@ -79,14 +81,14 @@ def train(train_data_path, valid_data_path, test_data_path, path_prefix, config,
                 data['court_label'] = [[0] * num_classes]
                 data['court_sl'] = [8]
             valid_data_temp.append(data)
-            #if data['dfdt_input'] != [] and data['court_input'] != []:
-            #    valid_data_temp.append(data)
         valid_data = valid_data_temp
 
     with open(test_data_path, 'r') as f:
         test_data = json.load(f)
         test_data_temp = []
         for data in test_data:
+            # The model do not accept empty input for each paragraph,
+            # make up empty sentence for empty paragraph.
             if data['dfdt_input'] == []:
                 data['dfdt_input'] = [[0] * 8]
                 data['dfdt_label'] = [[0] * num_classes]
@@ -96,8 +98,6 @@ def train(train_data_path, valid_data_path, test_data_path, path_prefix, config,
                 data['court_label'] = [[0] * num_classes]
                 data['court_sl'] = [8]
             test_data_temp.append(data)
-            #if data['dfdt_input'] != [] and data['court_input'] != []:
-            #    test_data_temp.append(data)
         test_data = test_data_temp
 
     embedding_file = open(embedding_path, 'rb')
@@ -117,6 +117,10 @@ def train(train_data_path, valid_data_path, test_data_path, path_prefix, config,
     print('Maxlen:', maxlen)
     print('Num_classes from data:', num_classes)
 
+    # Calculate Y_distribution_config, which will be used to weight training
+    # loss for each label.
+    #   Y_distribution_config[0] is the weight for positive prediction,
+    #   Y_distribution_config[1] is the weight for negative prediction.
     Y_distribution = {}
     labels = []
     Y_distribution_config = []
@@ -149,9 +153,6 @@ def train(train_data_path, valid_data_path, test_data_path, path_prefix, config,
                 Y_distribution_config[0][i] = 0
                 Y_distribution_config[1][i] = 0
     elif y_dis_mode.split('_')[0] == 'refine':
-        #Y_distribution_r = {i: np.sqrt(1.0 * (len(labels) - v) / v + 1) for i, v in Y_distribution.items()}
-        #Y_distribution_config.append([Y_distribution_r[i] for i in range(len(Y_distribution_r))])
-        # weighted loss here doesn't provide a better result, try normal loss
         Y_distribution_config.append([1] * num_classes)
         Y_distribution_config.append([1] * len(Y_distribution_config[0]))
         refine_class = int(y_dis_mode.split('_')[1])
@@ -315,6 +316,9 @@ def train(train_data_path, valid_data_path, test_data_path, path_prefix, config,
             start_time = time.time()
 
     print('\nModel saved at {}'.format(export_dir_))
+
+    # After training, automatically test the model on a testing set given in
+    # input_file
     input_file = os.path.join(root_path, 'focus/Data/dc_labeled/labeled-Focus4Project-189-2018.01.22-test.json')
     method = 2
     watch_class = 2
@@ -341,10 +345,10 @@ def main(argv):
 
     checkpoint_dir = os.path.join(root_path, 'all_in_one/demo/exported_models/'
                                   'focus_hierarchical_supervision/'
-                                  'batch_size_1-filter_num_300-filter_lengths_1 2 3 4 5-dfdt_only_0 1-lossweights_0.25 0.25 0.5-sepa_conv_1-class-1-pp_none-y_dis_log-round3_log-focus_hierarchical_supervision-config1.1.ini')
-    train(train_data_path, valid_data_path, test_data_path, path_prefix, config, load_model=checkpoint_dir)
-    #train(train_data_path, valid_data_path, test_data_path, path_prefix, config,
-    #      load_model=None)
+                                  'batch_size_1-filter_num_300-filter_lengths_1 2 3 4 5-dfdt_only_0 1-lossweights_0.25 0.25 0.5-sepa_conv_1-class-1-pp_none-y_dis_log-roundearlystop-focus_hierarchical_supervision-config1.1.ini')
+    #train(train_data_path, valid_data_path, test_data_path, path_prefix, config, load_model=checkpoint_dir)
+    train(train_data_path, valid_data_path, test_data_path, path_prefix, config,
+          load_model=None)
 
 
 if __name__ == '__main__':

@@ -61,7 +61,7 @@ def layer_prepostprocess(previous_value,
                 x = apply_norm(x, norm_type, depth, epsilon, is_training)
             else:
                 assert c == "d", ("Unknown sequence step %s" % c)
-                x = tf.layers.dropout(x, 1.0 - dropout_rate, training=is_training)
+                x = tf.layers.dropout(x, dropout_rate, training=is_training)
         return x
 
 def layer_preprocess(layer_input, hparams, sequence=None):

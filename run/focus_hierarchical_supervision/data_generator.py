@@ -1,3 +1,8 @@
+# coding=utf-8
+# __author__ = Haowen Xu
+# __email__ = haowen.will.xu@gmail.com
+# __time__ = 2018.01
+
 import os
 import re
 import pickle as pkl
@@ -39,16 +44,19 @@ def preprocessor(sents, tokenizer, word2index):
     id_sents = [[word2index.get(word, word2index['OOV']) for word in sent] for sent in pad_sents]
     return id_sents
 
+def tag_sent2doc(tag_sent):
+    tag_sent = np.asarray(tag_sent)
+    tag_sent = np.sum(tag_sent, axis=0)
+    tag_doc = [0 if tag == 0 else 1 for tag in tag_sent]
+    return tag_doc
+
 def data_generator(input_json_file, output_json_path, num_classes,
                    mode='Train_Valid_Test'):
+    """
+    Generate data in saved in json format
+    """
     with open(input_json_file, 'r') as f:
         input_data = json.load(f)
-
-    def tag_sent2doc(tag_sent):
-        tag_sent = np.asarray(tag_sent)
-        tag_sent = np.sum(tag_sent, axis=0)
-        tag_doc = [0 if tag == 0 else 1 for tag in tag_sent]
-        return tag_doc
 
     # load tokenizer
     segment_model_path = os.path.join(root_path, 'all_in_one/data/data_utils/thulac_models')
@@ -60,12 +68,9 @@ def data_generator(input_json_file, output_json_path, num_classes,
     with open(word_dict_path, 'rb') as f:
         word2index = pkl.load(f)
 
+    # The following part of codes is very ugly but meet our sepcial demand
     features = []
-    num = 0
     for case in tqdm(input_data):
-        # if num > 100:
-        #     continue
-        # num += 1
         dfdt_input = case['candidate_sent_dfdt']
         court_input = case['candidate_sent_court']
         content = case['content']
@@ -81,7 +86,9 @@ def data_generator(input_json_file, output_json_path, num_classes,
             tag = info['tag']
             span = info['span']
             text = content[span[0] : span[1]]
-            for text_label in re.split('[;；。\n]', content[span[0] : span[1]]):
+            # 'text' is a sentence marked by labeler, it doesn't necessary end
+            # up with [;；。\n], so split the 'text' here.
+            for text_label in re.split('[;；。\n]', text):
                 if text_label == '':
                     continue
 
@@ -107,7 +114,9 @@ def data_generator(input_json_file, output_json_path, num_classes,
             tag = info['tag']
             span = info['span']
             text = content[span[0] : span[1]]
-            for text_label in re.split('[;；。\n]', content[span[0] : span[1]]):
+            # 'text' is a sentence marked by labeler, it doesn't necessary end
+            # up with [;；。\n], so split the 'text' here.
+            for text_label in re.split('[;；。\n]', text):
                 if text_label == '':
                     continue
 
@@ -146,7 +155,8 @@ def data_generator(input_json_file, output_json_path, num_classes,
                        'docu_label' : docu_label}
             features.append(feature)
         except:
-            print('errors here:', tag_sent)
+            print('An unknown error happens when parsing the tag {} into '
+                  'index'.format(tag_sent))
 
     # shuffle
     features_id = [i for i in range(len(features))]
@@ -192,13 +202,13 @@ def data_generator(input_json_file, output_json_path, num_classes,
 
 
 if __name__ == '__main__':
-    input_json_file = os.path.join(root_path, 'all_in_one/data/data_json/labeled-Focus4Project-189-2018.01.18-train.json')
-    output_json_path = os.path.join(root_path, 'all_in_one/data/data_train/focus_hierarchical_supervision')
+    input_json_file = os.path.join(root_path, 'all_in_one/data/data_json/labeled-Focus4Project-189-2018.01.25-train.json')
+    output_json_path = os.path.join(root_path, 'all_in_one/data/data_train/focus_hierarchical_supervision_01_25')
     if not os.path.exists(output_json_path):
         os.makedirs(output_json_path)
     num_classes = 20
     data_generator(input_json_file, output_json_path, num_classes,
                    mode='Train_Valid')
-    input_json_file = os.path.join(root_path, 'all_in_one/data/data_json/labeled-Focus4Project-189-2018.01.22-test.json')
-    data_generator(input_json_file, output_json_path, num_classes,
-                   mode='Test')
+    #input_json_file = os.path.join(root_path, 'all_in_one/data/data_json/labeled-Focus4Project-189-2018.01.22-test.json')
+    #data_generator(input_json_file, output_json_path, num_classes,
+    #               mode='Test')
