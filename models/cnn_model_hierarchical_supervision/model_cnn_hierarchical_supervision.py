@@ -1,15 +1,16 @@
 import tensorflow as tf
 import numpy as np
-import os, sys
+import os
+import sys
 root_path = '/'.join(os.path.realpath(__file__).split('/')[:-4])
 sys.path.insert(0, root_path)
 
-from all_in_one.layers.bilstm_encoder import bilstm_encoder, lstm_decoder_no_feedback
-from all_in_one.models.bilstm_model_one_layer import utilizer
-from all_in_one.layers.common_layers import layer_preprocess, layer_postprocess
+from all_in_one.models.cnn_model_hierarchical_supervision import utilizer
+from all_in_one.layers.common_layers import layer_postprocess
 
 np.random.seed(8899)
 tf.set_random_seed(8899)
+
 
 def select_label(in_label, select_id):
     if in_label.ndim == 2:
@@ -24,52 +25,49 @@ class Model:
         config = self.config
         # Global steps for asynchronous distributed training.
         with tf.device(str(config['device'])):
-            self.global_step = tf.get_variable('global_step', [],
-                                               initializer=tf.constant_initializer(0),
-                                               trainable=False)
+            self.global_step = tf.get_variable(
+                'global_step', [],
+                initializer=tf.constant_initializer(0),
+                trainable=False)
 
     def _create_placeholder(self):
         # batch_size should be 1 in this version
 
         config = self.config
-        iClass = int(config['iClass'])
-        if iClass == -1:
-            num_classes = int(config['num_classes'])
-        else:
-            num_classes = 1
+        num_classes = int(config['num_classes'])
         self.dfdt_input_plh = tf.placeholder(
             dtype=tf.int32,
-            shape=[None, None], # [sentence, word]
+            shape=[None, None],  # [sentence, word]
             name='dfdt_input_plh')
 
         self.dfdt_label_plh = tf.placeholder(
             dtype=tf.float32,
-            shape=[None, num_classes], # [(sentence, class]
+            shape=[None, num_classes],  # [(sentence, class]
             name='dfdt_label_plh')
 
         self.dfdt_sl_plh = tf.placeholder(
             dtype=tf.int32,
-            shape=[None], # [sentence]
+            shape=[None],  # [sentence]
             name='dfdt_sl_plh')
 
         self.court_input_plh = tf.placeholder(
             dtype=tf.int32,
-            shape=[None, None], # [sentence, word]
+            shape=[None, None],  # [sentence, word]
             name='court_input_plh')
 
         self.court_label_plh = tf.placeholder(
             dtype=tf.float32,
-            shape=[None, num_classes], # [sentence, class]
+            shape=[None, num_classes],  # [sentence, class]
             name='court_label_plh')
 
         self.court_sl_plh = tf.placeholder(
             dtype=tf.int32,
-            shape=[None], # [sentence]
+            shape=[None],  # [sentence]
             name='court_sl_plh')
 
         self.docu_label_plh = tf.placeholder(
             dtype=tf.float32,
-            shape=[num_classes], # [class]
+            shape=[num_classes],  # [class]
             name='docu_label_plh')
 
         self.is_training = tf.placeholder(
@@ -93,11 +91,11 @@ class Model:
 
         hparams = tf.contrib.training.HParams()
         hparams.add_hparam('layer_preprocess_sequence',
-                            config['layer_preprocess_sequence'])
+                           config['layer_preprocess_sequence'])
         hparams.add_hparam('layer_postprocess_sequence',
-                            config['layer_postprocess_sequence'])
+                           config['layer_postprocess_sequence'])
         hparams.add_hparam('layer_prepostprocess_dropout',
-                            float(config['layer_prepostprocess_dropout']))
+                           float(config['layer_prepostprocess_dropout']))
         hparams.add_hparam('norm_type', config['norm_type'])
         hparams.add_hparam('hidden_size', int(config['hidden_size']))
         hparams.add_hparam('norm_epsilon', float(config['norm_epsilon']))
@@ -155,7 +153,8 @@ class Model:
                     hparams,
                     is_training=self.is_training)
 
-                cnn_outputs_concat_act = tf.nn.relu(cnn_outputs_concat, name='relu')
+                cnn_outputs_concat_act = tf.nn.relu(cnn_outputs_concat,
+                                                    name='relu')
 
                 # max pooling over kernels and dropout
                 label_hidden_state = layer_postprocess(
@@ -164,11 +163,6 @@ class Model:
                     hparams,
                     sequence='d',
                     is_training=self.is_training)
-
-                # one layer mlp
-                #label_W = mlp_weight_variable([cnn_size, num_classes])
-                #label_b = mlp_bias_variable([num_classes])
-                #h_outputs = tf.matmul(label_hidden_state, label_W) + label_b
 
                 # two layer mlp
                 with tf.name_scope('fc_1'):
@@ -186,7 +180,8 @@ class Model:
                     logits = tf.nn.sigmoid(h_outputs)
                 else:
                     logits = tf.nn.softmax(h_outputs)
-                logits = tf.clip_by_value(logits, clip_value_min=1e-6, clip_value_max=1.0 - 1e-6)
+                logits = tf.clip_by_value(logits, clip_value_min=1e-6,
+                                          clip_value_max=1.0 - 1e-6)
                 loss = tf.reduce_mean(-tf.reduce_sum(
                     label * tf.log(logits) * self.y_distribution[0]
                     + (1 - label) * tf.log(1 - logits) * self.y_distribution[1],
@@ -206,9 +201,9 @@ class Model:
                         # if loss weight is 0, then ignore this label to speed
                         # up training, else, doing convolution
                         if (self.y_distribution[0][iClass] == 0 and
-                            self.y_distribution[1][iClass] == 0):
+                                self.y_distribution[1][iClass] == 0):
                             h_outputs_oneclass = tf.zeros([tf.shape(inputs)[0], 1],
-                                                             dtype=tf.float32)
+                                                          dtype=tf.float32)
                             print('ignore class {}'.format(iClass))
                         else:
                             conv_Ws = []
@@ -325,8 +320,8 @@ class Model:
             max_mask = tf.constant(max_mask_init, dtype=dfdt_logits.dtype)
 
             # min logic doesn't work well
-            #docu_logits = (tf.reduce_min(tf.stack([dfdt_logits * min_mask, court_logits * min_mask]), axis=0) +
-            #               tf.reduce_max(tf.stack([dfdt_logits * max_mask, court_logits * max_mask]), axis=0))
+            # docu_logits = (tf.reduce_min(tf.stack([dfdt_logits * min_mask, court_logits * min_mask]), axis=0) +
+            #                tf.reduce_max(tf.stack([dfdt_logits * max_mask, court_logits * max_mask]), axis=0))
 
             # use dfdt only for min logic
             docu_logits = (dfdt_logits * min_mask +
@@ -365,7 +360,6 @@ class Model:
         self.w_embedding = w_embedding
         self.multilabel = multilabel
         self.y_distribution = y_distribution
-        self.iClass = int(config['iClass'])
 
         with tf.variable_scope(model_name):
             self.init_global_step()
@@ -384,11 +378,6 @@ class Model:
         court_sl = np.asarray(features['court_sl'])
 
         docu_label = np.asarray(features['docu_label'])
-
-        if self.iClass > -1:
-            dfdt_label = select_label(dfdt_label, [self.iClass])
-            court_label = select_label(court_label, [self.iClass])
-            docu_label = select_label(docu_label, [self.iClass])
 
         feed_dict = {self.court_input_plh: court_input,
                      self.court_label_plh: court_label,
@@ -433,11 +422,6 @@ class Model:
 
             docu_label = np.asarray(features['docu_label'])
 
-            if self.iClass > -1:
-                dfdt_label = select_label(dfdt_label, [self.iClass])
-                court_label = select_label(court_label, [self.iClass])
-                docu_label = select_label(docu_label, [self.iClass])
-
             feed_dict = {self.dfdt_input_plh: dfdt_input,
                          self.dfdt_label_plh: dfdt_label,
                          self.dfdt_sl_plh: dfdt_sl,
@@ -454,11 +438,8 @@ class Model:
             r = sess.run(checkout, feed_dict=feed_dict)
 
             dfdt_logits_sents = r[0]
-            dfdt_loss = r[1]
             court_logits_sents = r[2]
-            court_loss = r[3]
             docu_logits = r[4]
-            docu_loss = r[5]
             loss += r[6]
             # print('dfdt_logits: ', dfdt_logits)
             # print('dfdt_label: ', max(dfdt_label))
@@ -492,29 +473,4 @@ class Model:
 
 
 if __name__ == '__main__':
-    t = [float(x)/10 for x in range(200)]
-    import math
-    features = []
-    labels = []
-    a = [4 for _ in range(50)]
-    b = [6 for _ in range(50)]
-    sl = []
-    for _ in range(10):
-        features.append(a)
-        labels.append([0, 1])
-        sl.append(len(a))
-        features.append(b)
-        labels.append([1, 0])
-        sl.append(len(b))
-
-    tf.reset_default_graph()
-    gpu_options = tf.GPUOptions(allow_growth=True)
-    sess = tf.InteractiveSession(config=tf.ConfigProto(gpu_options=gpu_options, allow_soft_placement=True))
-
-    model = Model(W_embedding, config, multilabel=is_multilabel)
-
-    sess.run(tf.global_variables_initializer())
-
-    epoch_num = 100
-    for epoch in epoch_num:
-        model.train(sess, features, sl_batch, y_batch)
+    pass

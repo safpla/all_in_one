@@ -178,14 +178,13 @@ def train(train_data_path, valid_data_path, test_data_path, path_prefix, config,
     if load_model:
         model.load_model(sess, load_model)
     saver = tf.train.Saver(max_to_keep=10)
-    model_name = 'batch_size_{}-filter_num_{}-filter_lengths_{}-dfdt_only_{}-lossweights_{}-sepa_conv_{}-class{}-pp_{}-y_dis_{}-round{}-{}-{}'.format(
+    model_name = 'batch_size_{}-filter_num_{}-filter_lengths_{}-dfdt_only_{}-lossweights_{}-sepa_conv_{}-pp_{}-y_dis_{}-round{}-{}-{}'.format(
         config['batch_size'],
         config['filter_num'],
         config['filter_lengths'],
         config['dfdt_only'],
         config['loss_weights'],
         config['sepa_conv'],
-        config['iClass'],
         config['layer_postprocess_sequence'],
         config['y_dis_mode'],
         config['round_num'],
