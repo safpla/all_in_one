@@ -110,7 +110,7 @@ def layer_postprocess(layer_input, layer_output, hparams, sequence=None,
     A hyperparemeters object is passed for convenience.  The hyperparameters
     that may be used are:
 
-      layer_postprocess_sequence
+      layer_postprocess_sequence: a: res, d: dropout, n: norm
       layer_prepostprocess_dropout
       norm_type
       hidden_size

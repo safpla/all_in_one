@@ -12,14 +12,6 @@ np.random.seed(8899)
 tf.set_random_seed(8899)
 
 
-def select_label(in_label, select_id):
-    if in_label.ndim == 2:
-        out_label = in_label[:, select_id]
-    else:
-        out_label = in_label[select_id]
-    return out_label
-
-
 class Model:
     def init_global_step(self):
         config = self.config
@@ -182,7 +174,7 @@ class Model:
                     logits = tf.nn.softmax(h_outputs)
                 logits = tf.clip_by_value(logits, clip_value_min=1e-6,
                                           clip_value_max=1.0 - 1e-6)
-                loss = tf.reduce_mean(-tf.reduce_sum(
+                loss_para = tf.reduce_mean(-tf.reduce_sum(
                     label * tf.log(logits) * self.y_distribution[0]
                     + (1 - label) * tf.log(1 - logits) * self.y_distribution[1],
                     reduction_indices=[1]))
@@ -190,7 +182,7 @@ class Model:
                 # max pooling over sentences
                 logits_para = tf.reduce_max(logits, axis=0)
 
-                return logits_para, logits, loss
+                return logits_para, logits, loss_para
 
         def cnn_one_layer_sepa_conv(inputs, label, sl):
             with tf.name_scope('CNN'):
@@ -257,7 +249,7 @@ class Model:
                 else:
                     logits = tf.nn.softmax(h_outputs_concat)
                 logits = tf.clip_by_value(logits, clip_value_min=1e-6, clip_value_max=1.0 - 1e-6)
-                loss = tf.reduce_mean(-tf.reduce_sum(
+                loss_para = tf.reduce_mean(-tf.reduce_sum(
                     label * tf.log(logits) * self.y_distribution[0]
                     + (1 - label) * tf.log(1 - logits) * self.y_distribution[1],
                     reduction_indices=[1]))
@@ -265,7 +257,7 @@ class Model:
                 # max pooling over sentences
                 logits_para = tf.reduce_max(logits, axis=0)
 
-                return logits_para, logits, loss
+                return logits_para, logits, loss_para
 
         # word embedding
         with tf.device('/cpu:0'), tf.name_scope('word_embedding'):

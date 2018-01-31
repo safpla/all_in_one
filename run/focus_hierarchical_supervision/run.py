@@ -273,7 +273,7 @@ def train(train_data_path, valid_data_path, test_data_path, path_prefix, config,
                 #     shutil.rmtree(root_path + '/all_in_one/demo/exported_models/' + mission + '/' + str(1))
                 # export_func.export(model, sess, signature_name=mission, version=1)
 
-                saver.save(sess, export_dir_ + 'test_model',global_step=batches)
+                saver.save(sess, export_dir_ + 'test_model', global_step=batches)
 
             else:
                 timedelay += 1
@@ -323,7 +323,8 @@ def train(train_data_path, valid_data_path, test_data_path, path_prefix, config,
     watch_class = 2
     graph_path = 'cnn_model_hierarchical_supervision'
     graph_name = 'model_cnn_hierarchical_supervision'
-    compare_fn(input_file, method, watch_class, model_name, graph_path, graph_name, config)
+    compare_fn(input_file, method, watch_class, model_name, graph_path,
+               graph_name, mission, mission_data, config)
 
 
 def main(argv):
@@ -344,10 +345,9 @@ def main(argv):
 
     checkpoint_dir = os.path.join(root_path, 'all_in_one/demo/exported_models/'
                                   'focus_hierarchical_supervision/'
-                                  'batch_size_1-filter_num_300-filter_lengths_1 2 3 4 5-dfdt_only_0 1-lossweights_0.25 0.25 0.5-sepa_conv_1-class-1-pp_none-y_dis_log-roundearlystop-focus_hierarchical_supervision-config1.1.ini')
+                                  'batch_size_1-filter_num_300-filter_lengths_1 2 3 4 5-dfdt_only_0 1-lossweights_0.25 0.25 0.5-sepa_conv_1-pp_none-y_dis_log-round3-focus_hierarchical_supervision_01_25-config1.1.ini')
     #train(train_data_path, valid_data_path, test_data_path, path_prefix, config, load_model=checkpoint_dir)
-    train(train_data_path, valid_data_path, test_data_path, path_prefix, config,
-          load_model=None)
+    train(train_data_path, valid_data_path, test_data_path, path_prefix, config, load_model=None)
 
 
 if __name__ == '__main__':
